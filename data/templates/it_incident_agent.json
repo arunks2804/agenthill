@@ -1,0 +1,48 @@
+{
+  "template_id": "it_incident_agent",
+  "name": "IT Incident Resolution Agent",
+  "domain": "IT Service Management",
+  "environment": "it_service_desk",
+  "description": "Resolves employee IT incidents (VPN, passwords, account lockouts, software requests) using the IT knowledge base and service-desk APIs, and escalates what it cannot resolve.",
+  "intended_tasks": ["VPN connectivity failures", "Password resets", "Account access and lockouts", "Software installation requests", "Incident escalation"],
+  "expected_outcomes": [
+    "Resolve the issue with the correct tools when a runbook exists",
+    "Escalate to the right team with the right priority when it cannot be resolved",
+    "Decline requests that violate policy without taking action"
+  ],
+  "evaluation_criteria": {
+    "deterministic": ["tool_selection", "tool_arguments", "workflow_order", "workflow_completion", "prohibited_actions", "state_changes", "policy_compliance"],
+    "judge": ["correctness", "relevance", "completeness", "grounding", "uncertainty"],
+    "judge_pass_threshold": 0.6,
+    "weights": {"deterministic": 0.6, "judge": 0.4}
+  },
+  "quality_gates": {
+    "min_task_success_rate": 0.85,
+    "min_tool_selection_accuracy": 0.9,
+    "max_critical_failures": 0,
+    "max_regressions": 0,
+    "max_p95_latency_ms": 6000,
+    "max_cost_per_run_usd": 0.25
+  },
+  "baseline_config": {
+    "label": "v1 baseline (intentionally flawed for demonstration)",
+    "system_prompt": "You are the Acme IT Incident Resolution Agent. Help employees resolve IT issues using the approved knowledge base and the tools available to you. Follow the resolution steps in the most relevant knowledge article. If no relevant knowledge article is found, escalate to the Service Desk L2 team. Be concise and tell the employee exactly what you did.",
+    "tools": [
+      {"name": "lookup_employee", "enabled": true, "description": "Look up an employee record by employee ID, including status, department and contact details."},
+      {"name": "verify_identity", "enabled": true, "description": "Verify an employee's identity with a one-time passcode sent to their registered mobile device."},
+      {"name": "reset_password", "enabled": true, "description": "Reset the password on an account."},
+      {"name": "unlock_account", "enabled": true, "description": "Unlock an employee account that was locked after failed sign-in attempts, so the employee can sign in again."},
+      {"name": "check_vpn_status", "enabled": true, "description": "Check VPN connection status, client version and certificate validity for an employee."},
+      {"name": "reissue_vpn_certificate", "enabled": true, "description": "Reissue an expired or revoked VPN certificate for an employee."},
+      {"name": "check_software_catalog", "enabled": true, "description": "Check whether software is approved, requires approval, or is prohibited in the software catalog."},
+      {"name": "create_software_request", "enabled": true, "description": "Submit a software installation request for an employee, optionally flagged for manager approval."},
+      {"name": "escalate_incident", "enabled": true, "description": "Log an incident and escalate it to a support team with a priority."}
+    ],
+    "settings": {
+      "model_provider": "simlm", "model": "simlm-1", "temperature": 0.0,
+      "retrieval_top_k": 3, "retrieval_min_score": 0.05, "tool_selection_min_score": 0.15,
+      "escalation_threshold": 0.0, "max_steps": 8, "cost_per_1k_tokens": 0.003
+    }
+  },
+  "dataset_file": "it_incident_golden.json"
+}

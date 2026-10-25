@@ -1,0 +1,129 @@
+{
+  "judge": {
+    "provider": "deterministic",
+    "model": "rubric-v1"
+  },
+  "examples": 16,
+  "scored": 16,
+  "errors": 0,
+  "agreement_rate": 1.0,
+  "cohens_kappa": 1.0,
+  "false_pass": 0,
+  "false_fail": 0,
+  "duration_ms": 0.6,
+  "computed_at": "2026-10-25T14:19:44.693088Z",
+  "rows": [
+    {
+      "id": "CAL-01",
+      "human_pass": true,
+      "judge_pass": true,
+      "judge_overall": 0.833,
+      "error": null
+    },
+    {
+      "id": "CAL-02",
+      "human_pass": false,
+      "judge_pass": false,
+      "judge_overall": 0.25,
+      "error": null
+    },
+    {
+      "id": "CAL-03",
+      "human_pass": true,
+      "judge_pass": true,
+      "judge_overall": 0.822,
+      "error": null
+    },
+    {
+      "id": "CAL-04",
+      "human_pass": false,
+      "judge_pass": false,
+      "judge_overall": 0.071,
+      "error": null
+    },
+    {
+      "id": "CAL-05",
+      "human_pass": true,
+      "judge_pass": true,
+      "judge_overall": 0.7,
+      "error": null
+    },
+    {
+      "id": "CAL-06",
+      "human_pass": false,
+      "judge_pass": false,
+      "judge_overall": 0.1,
+      "error": null
+    },
+    {
+      "id": "CAL-07",
+      "human_pass": true,
+      "judge_pass": true,
+      "judge_overall": 0.834,
+      "error": null
+    },
+    {
+      "id": "CAL-08",
+      "human_pass": false,
+      "judge_pass": false,
+      "judge_overall": 0.25,
+      "error": null
+    },
+    {
+      "id": "CAL-09",
+      "human_pass": true,
+      "judge_pass": true,
+      "judge_overall": 1.0,
+      "error": null
+    },
+    {
+      "id": "CAL-10",
+      "human_pass": true,
+      "judge_pass": true,
+      "judge_overall": 0.875,
+      "error": null
+    },
+    {
+      "id": "CAL-11",
+      "human_pass": false,
+      "judge_pass": false,
+      "judge_overall": 0.25,
+      "error": null
+    },
+    {
+      "id": "CAL-12",
+      "human_pass": true,
+      "judge_pass": true,
+      "judge_overall": 0.875,
+      "error": null
+    },
+    {
+      "id": "CAL-13",
+      "human_pass": false,
+      "judge_pass": false,
+      "judge_overall": 0.25,
+      "error": null
+    },
+    {
+      "id": "CAL-14",
+      "human_pass": true,
+      "judge_pass": true,
+      "judge_overall": 0.95,
+      "error": null
+    },
+    {
+      "id": "CAL-15",
+      "human_pass": true,
+      "judge_pass": true,
+      "judge_overall": 0.917,
+      "error": null
+    },
+    {
+      "id": "CAL-16",
+      "human_pass": false,
+      "judge_pass": false,
+      "judge_overall": 0.167,
+      "error": null
+    }
+  ]
+}

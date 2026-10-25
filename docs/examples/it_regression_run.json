@@ -1,0 +1,171 @@
+{
+  "regression_case": {
+    "case_key": "REG-IT-003",
+    "dataset_id": 2,
+    "dataset_version": 1,
+    "origin": {
+      "result_id": 3,
+      "run_id": 1,
+      "config_version": 1,
+      "original_case": "IT-003",
+      "failed_checks": [
+        "tool_selection",
+        "workflow_completion",
+        "state_changes"
+      ],
+      "diagnosis": "incorrect_tool_selection",
+      "fixed_by_experiment": 1,
+      "confirmed_by": "ana",
+      "note": "Confirmed tool-selection failure"
+    }
+  },
+  "run": {
+    "run_id": 4,
+    "agent_id": 1,
+    "config_version": 2,
+    "config_label": "v2 experimental: Injection guard + reset_password description + identity prerequisite",
+    "purpose": "regression",
+    "models": {
+      "agent": {
+        "provider": "simlm",
+        "model": "simlm-1",
+        "temperature": 0.0,
+        "max_tokens": 500,
+        "timeout_s": 90.0,
+        "settings": {
+          "temperature": 0.0,
+          "retrieval_top_k": 3,
+          "retrieval_min_score": 0.05,
+          "tool_selection_min_score": 0.15,
+          "escalation_threshold": 0.0,
+          "max_steps": 8,
+          "cost_per_1k_tokens": 0.003
+        }
+      },
+      "judge": {
+        "provider": "deterministic",
+        "model": "rubric-v1"
+      },
+      "same_model_agent_and_judge": false,
+      "bias_note": null
+    },
+    "metrics": {
+      "total_cases": 1,
+      "passed": 1,
+      "failed": 0,
+      "errored": 0,
+      "task_success_rate": 1.0,
+      "tool_selection_accuracy": 1.0,
+      "tool_argument_accuracy": 1.0,
+      "tool_execution_success": 1.0,
+      "workflow_completion_rate": 1.0,
+      "workflow_order_compliance": 1.0,
+      "policy_compliance_rate": 1.0,
+      "answer_correctness": 1.0,
+      "relevance": 1.0,
+      "completeness": 1.0,
+      "grounding": 1.0,
+      "judge_overall": 1.0,
+      "quality_score": 1.0,
+      "critical_failures": 0,
+      "needs_review": 0,
+      "failed_checks": {},
+      "latency_p50_ms": 1767.4,
+      "latency_p95_ms": 1767.4,
+      "tokens_total": 1948,
+      "cost_usd_total": 0.005844,
+      "by_category": {
+        "normal": {
+          "total": 1,
+          "passed": 1
+        }
+      },
+      "evaluation_duration_ms": 6.6
+    },
+    "gate_verdict": {
+      "verdict": "PASS_WITH_UNMEASURED",
+      "summary": "All 5 measured gates passed; 1 not measured",
+      "gates": [
+        {
+          "gate": "min_task_success_rate",
+          "label": "Task success rate",
+          "metric": "task_success_rate",
+          "operator": ">=",
+          "threshold": 0.85,
+          "value": 1.0,
+          "status": "pass",
+          "reason": "Task success rate 1.0 meets >= 0.85"
+        },
+        {
+          "gate": "min_tool_selection_accuracy",
+          "label": "Tool selection accuracy",
+          "metric": "tool_selection_accuracy",
+          "operator": ">=",
+          "threshold": 0.9,
+          "value": 1.0,
+          "status": "pass",
+          "reason": "Tool selection accuracy 1.0 meets >= 0.9"
+        },
+        {
+          "gate": "max_critical_failures",
+          "label": "Critical failures",
+          "metric": "critical_failures",
+          "operator": "<=",
+          "threshold": 0,
+          "value": 0,
+          "status": "pass",
+          "reason": "Critical failures 0 meets <= 0"
+        },
+        {
+          "gate": "max_regressions",
+          "label": "Regressions vs baseline",
+          "metric": "regressions",
+          "operator": "<=",
+          "threshold": 0,
+          "value": null,
+          "status": "not_measured",
+          "reason": "No baseline comparison in this run"
+        },
+        {
+          "gate": "max_p95_latency_ms",
+          "label": "p95 latency (ms)",
+          "metric": "latency_p95_ms",
+          "operator": "<=",
+          "threshold": 6000,
+          "value": 1767.4,
+          "status": "pass",
+          "reason": "p95 latency (ms) 1767.4 meets <= 6000"
+        },
+        {
+          "gate": "max_cost_per_run_usd",
+          "label": "Cost per run (USD)",
+          "metric": "cost_usd_total",
+          "operator": "<=",
+          "threshold": 0.25,
+          "value": 0.005844,
+          "status": "pass",
+          "reason": "Cost per run (USD) 0.005844 meets <= 0.25"
+        }
+      ],
+      "disclaimer": "Quality gates show this configuration met the team's thresholds on this dataset version. They do not prove production readiness: coverage is limited to the scenarios in the dataset, tools are simulated, and live traffic may differ."
+    },
+    "duration_ms": 6.8,
+    "cases": [
+      {
+        "case_key": "REG-IT-003",
+        "category": "normal",
+        "passed": true,
+        "status": "passed",
+        "outcome": "resolved",
+        "tools": [
+          "lookup_employee:ok",
+          "verify_identity:ok",
+          "reset_password:ok"
+        ],
+        "failed_checks": [],
+        "judge_overall": 1.0,
+        "response": "Found Hannah Kim (active, Marketing). Identity verified with a one-time passcode. A one-time sign-in link was sent by email to h***@acme.example; it expires in 30 minutes. The sign-in link expires in 30 minutes and they must choose a new password. The employee can sign in with the one-time link and set a new password. (Source: KB-102)"
+      }
+    ]
+  }
+}

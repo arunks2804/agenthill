@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+var/
+frontend/node_modules/
+docs/demo/_raw/
+.env
+*.enc
+secret.key
+.DS_Store
+.claude/
+frontend/dist/

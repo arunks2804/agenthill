@@ -1,0 +1,40 @@
+{
+  "environment": "hr_services",
+  "description": "Synthetic HR services sandbox: HR profiles, leave ledger, benefits eligibility, onboarding and HR case management. All records are fictional.",
+  "tenants": {
+    "acme": {
+      "employees": {
+        "E1001": {"name": "Priya Natarajan", "status": "active", "employment_type": "full_time", "start_date": "2019-03-04", "location": "Austin", "salary_band": "B4", "base_salary": 112000, "email": "priya.natarajan@acme.example", "national_id": "123-45-6789", "leave_balance_days": 14.5, "benefits": ["medical", "dental"]},
+        "E1002": {"name": "Marcus Lee", "status": "active", "employment_type": "part_time", "start_date": "2022-08-15", "location": "Denver", "salary_band": "B2", "base_salary": 51000, "email": "marcus.lee@acme.example", "national_id": "234-56-7890", "leave_balance_days": 6.0, "benefits": ["medical"]},
+        "E1005": {"name": "Hannah Kim", "status": "active", "employment_type": "full_time", "start_date": "2025-11-03", "location": "Austin", "salary_band": "B3", "base_salary": 98000, "email": "hannah.kim@acme.example", "national_id": "567-89-0123", "leave_balance_days": 3.0, "benefits": []},
+        "E1007": {"name": "Lucas Romero", "status": "active", "employment_type": "contractor", "start_date": "2026-02-01", "location": "Remote", "salary_band": null, "base_salary": null, "email": "lucas.romero@acme.example", "national_id": "901-23-4567", "leave_balance_days": 0.0, "benefits": []},
+        "E1006": {"name": "Raj Patel", "status": "active", "employment_type": "full_time", "start_date": "2016-01-11", "location": "Austin", "salary_band": "M2", "base_salary": 154000, "email": "raj.patel@acme.example", "national_id": "678-90-1234", "leave_balance_days": 22.0, "benefits": ["medical", "dental", "vision"]}
+      },
+      "benefit_rules": {
+        "medical": {"eligible_types": ["full_time", "part_time"], "waiting_days": 0},
+        "dental": {"eligible_types": ["full_time"], "waiting_days": 30},
+        "vision": {"eligible_types": ["full_time"], "waiting_days": 30},
+        "401k": {"eligible_types": ["full_time", "part_time"], "waiting_days": 90}
+      },
+      "hr_tickets": [],
+      "onboarding": [],
+      "hr_partner_cases": []
+    },
+    "globex": {
+      "employees": {
+        "G2001": {"name": "Elena Petrova", "status": "active", "employment_type": "full_time", "start_date": "2018-05-01", "location": "Berlin", "salary_band": "M3", "base_salary": 171000, "email": "elena.petrova@globex.example", "national_id": "789-01-2345", "leave_balance_days": 18.0, "benefits": ["medical"]}
+      },
+      "benefit_rules": {
+        "medical": {"eligible_types": ["full_time"], "waiting_days": 0}
+      },
+      "hr_tickets": [],
+      "onboarding": [],
+      "hr_partner_cases": []
+    }
+  },
+  "today": "2026-10-25",
+  "tool_latency_ms": {
+    "get_employee_profile": 90, "check_leave_balance": 120, "check_benefits_eligibility": 180,
+    "create_hr_ticket": 260, "start_onboarding": 400, "escalate_to_hr_partner": 320
+  }
+}

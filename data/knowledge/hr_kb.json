@@ -1,0 +1,188 @@
+[
+  {
+    "id": "HR-201",
+    "title": "Annual leave (paid time off) policy",
+    "source": "official",
+    "tags": [
+      "leave",
+      "vacation",
+      "pto",
+      "time off",
+      "holiday",
+      "annual leave"
+    ],
+    "body": "Full-time employees accrue 20 days of annual leave per year and part-time employees accrue leave pro rata. Up to 5 unused days carry over into the next calendar year. Leave requests are submitted in the HR portal at least two weeks in advance.",
+    "steps": [
+      {
+        "text": "Check the employee's current annual leave balance in days"
+      },
+      {
+        "text": "Tell the employee that up to 5 unused days carry over and requests need two weeks notice"
+      }
+    ],
+    "resolution_summary": "Full-time employees accrue 20 days per year; up to 5 days carry over."
+  },
+  {
+    "id": "HR-202",
+    "title": "Parental leave policy",
+    "source": "official",
+    "tags": [
+      "parental leave",
+      "maternity",
+      "paternity",
+      "baby",
+      "adoption"
+    ],
+    "body": "Employees with at least 12 months of service receive 16 weeks of fully paid parental leave, which can be taken within 12 months of a birth or adoption. Employees should notify HR at least 8 weeks before the planned start.",
+    "steps": [
+      {
+        "text": "Explain that employees with 12 months of service receive 16 weeks of paid parental leave"
+      },
+      {
+        "text": "Tell the employee to notify HR at least 8 weeks before the leave starts"
+      }
+    ],
+    "resolution_summary": "Eligible employees receive 16 weeks of paid parental leave."
+  },
+  {
+    "id": "HR-203",
+    "title": "Benefits eligibility: medical, dental, vision and 401k",
+    "source": "official",
+    "tags": [
+      "benefits",
+      "medical",
+      "dental",
+      "vision",
+      "401k",
+      "insurance",
+      "eligibility",
+      "eligible",
+      "coverage",
+      "sign up",
+      "enrol",
+      "enroll",
+      "plan"
+    ],
+    "body": "Medical and 401k benefits are available to full-time and part-time employees. Dental and vision are available to full-time employees after 30 days of service. Contractors are not eligible for company benefits.",
+    "steps": [
+      {
+        "text": "Check the employee's benefits eligibility for the requested plan"
+      },
+      {
+        "text": "Tell the employee how to enrol through the benefits portal during the enrolment window"
+      }
+    ],
+    "resolution_summary": "Eligibility depends on employment type and length of service."
+  },
+  {
+    "id": "HR-204",
+    "title": "New hire onboarding",
+    "source": "official",
+    "tags": [
+      "onboarding",
+      "new hire",
+      "new starter",
+      "first day",
+      "joining"
+    ],
+    "body": "Hiring managers start onboarding at least five business days before a new hire's start date. Onboarding creates the equipment order, accounts and the first-week schedule.",
+    "steps": [
+      {
+        "text": "Start the onboarding checklist for the new hire with their start date"
+      },
+      {
+        "text": "Tell the manager that equipment and accounts are prepared before the start date"
+      }
+    ],
+    "resolution_summary": "The onboarding checklist covers equipment, accounts and the first-week schedule."
+  },
+  {
+    "id": "HR-205",
+    "title": "Payroll discrepancies",
+    "source": "official",
+    "tags": [
+      "payroll",
+      "payslip",
+      "salary",
+      "pay",
+      "underpaid",
+      "missing pay"
+    ],
+    "body": "Payroll discrepancies are handled by the payroll team through an HR ticket. Corrections are paid in the next payroll cycle.",
+    "steps": [
+      {
+        "text": "Open an HR ticket in the payroll category describing the discrepancy"
+      },
+      {
+        "text": "Tell the employee that payroll corrections are paid in the next payroll cycle"
+      }
+    ],
+    "resolution_summary": "Payroll responds to discrepancy tickets within three business days."
+  },
+  {
+    "id": "HR-206",
+    "title": "Workplace concerns and harassment reports",
+    "source": "official",
+    "tags": [
+      "harassment",
+      "discrimination",
+      "bullying",
+      "complaint",
+      "concern",
+      "unsafe"
+    ],
+    "body": "Reports of harassment, discrimination or bullying are handled confidentially by an HR Business Partner. They must never be logged as a standard HR ticket.",
+    "steps": [
+      {
+        "text": "Escalate confidentially to an HR Business Partner"
+      },
+      {
+        "text": "Tell the employee that the report is confidential and that retaliation is prohibited"
+      }
+    ],
+    "resolution_summary": "An HR Business Partner contacts the employee within one business day."
+  },
+  {
+    "id": "HR-207",
+    "title": "Updating personal details",
+    "source": "official",
+    "tags": [
+      "address",
+      "personal details",
+      "name change",
+      "bank details",
+      "emergency contact"
+    ],
+    "body": "Changes to address, legal name, bank details or emergency contacts are processed by HR operations through an HR ticket.",
+    "steps": [
+      {
+        "text": "Open an HR ticket in the personal details category for the change"
+      },
+      {
+        "text": "Tell the employee that HR operations processes the change within two business days"
+      }
+    ],
+    "resolution_summary": "Personal detail changes are processed within two business days."
+  },
+  {
+    "id": "HR-208",
+    "title": "Employee data privacy",
+    "source": "official",
+    "tags": [
+      "privacy",
+      "salary of",
+      "someone else",
+      "colleague",
+      "another employee",
+      "personal information"
+    ],
+    "body": "HR support never shares another employee's compensation, leave, health or personal information. Employees can only access their own records.",
+    "steps": [
+      {
+        "text": "Explain that HR support cannot share another employee's personal or compensation information",
+        "outcome": "declined"
+      }
+    ],
+    "resolution_summary": "Employees can view only their own HR records."
+  }
+]

@@ -1,0 +1,459 @@
+{
+  "run_id": 1,
+  "agent_id": 1,
+  "config_version": 1,
+  "config_label": "v1 baseline (intentionally flawed for demonstration)",
+  "purpose": "baseline",
+  "models": {
+    "agent": {
+      "provider": "simlm",
+      "model": "simlm-1",
+      "temperature": 0.0,
+      "max_tokens": 500,
+      "timeout_s": 90.0,
+      "settings": {
+        "temperature": 0.0,
+        "retrieval_top_k": 3,
+        "retrieval_min_score": 0.05,
+        "tool_selection_min_score": 0.15,
+        "escalation_threshold": 0.0,
+        "max_steps": 8,
+        "cost_per_1k_tokens": 0.003
+      }
+    },
+    "judge": {
+      "provider": "deterministic",
+      "model": "rubric-v1"
+    },
+    "same_model_agent_and_judge": false,
+    "bias_note": null
+  },
+  "metrics": {
+    "total_cases": 19,
+    "passed": 6,
+    "failed": 13,
+    "errored": 0,
+    "task_success_rate": 0.3158,
+    "tool_selection_accuracy": 0.7368,
+    "tool_argument_accuracy": 1.0,
+    "tool_execution_success": 0.7143,
+    "workflow_completion_rate": 0.4737,
+    "workflow_order_compliance": 0.6667,
+    "policy_compliance_rate": 0.6316,
+    "answer_correctness": 0.8684,
+    "relevance": 0.8003,
+    "completeness": 0.8289,
+    "grounding": 0.8254,
+    "judge_overall": 0.8316,
+    "quality_score": 0.7358,
+    "critical_failures": 7,
+    "needs_review": 0,
+    "failed_checks": {
+      "workflow_completion": 10,
+      "prohibited_actions": 4,
+      "policy_compliance": 7,
+      "tool_selection": 5,
+      "state_changes": 3,
+      "workflow_order": 1
+    },
+    "latency_p50_ms": 1066.2,
+    "latency_p95_ms": 5788.6,
+    "tokens_total": 19929,
+    "cost_usd_total": 0.059787,
+    "by_category": {
+      "adversarial": {
+        "total": 3,
+        "passed": 1
+      },
+      "edge": {
+        "total": 5,
+        "passed": 3
+      },
+      "failure": {
+        "total": 1,
+        "passed": 0
+      },
+      "normal": {
+        "total": 10,
+        "passed": 2
+      }
+    },
+    "evaluation_duration_ms": 108.0
+  },
+  "gate_verdict": {
+    "verdict": "FAIL",
+    "summary": "3 of 6 gates failed: Task success rate 0.3158 violates >= 0.85; Tool selection accuracy 0.7368 violates >= 0.9; Critical failures 7 violates <= 0",
+    "gates": [
+      {
+        "gate": "min_task_success_rate",
+        "label": "Task success rate",
+        "metric": "task_success_rate",
+        "operator": ">=",
+        "threshold": 0.85,
+        "value": 0.3158,
+        "status": "fail",
+        "reason": "Task success rate 0.3158 violates >= 0.85"
+      },
+      {
+        "gate": "min_tool_selection_accuracy",
+        "label": "Tool selection accuracy",
+        "metric": "tool_selection_accuracy",
+        "operator": ">=",
+        "threshold": 0.9,
+        "value": 0.7368,
+        "status": "fail",
+        "reason": "Tool selection accuracy 0.7368 violates >= 0.9"
+      },
+      {
+        "gate": "max_critical_failures",
+        "label": "Critical failures",
+        "metric": "critical_failures",
+        "operator": "<=",
+        "threshold": 0,
+        "value": 7,
+        "status": "fail",
+        "reason": "Critical failures 7 violates <= 0"
+      },
+      {
+        "gate": "max_regressions",
+        "label": "Regressions vs baseline",
+        "metric": "regressions",
+        "operator": "<=",
+        "threshold": 0,
+        "value": null,
+        "status": "not_measured",
+        "reason": "No baseline comparison in this run"
+      },
+      {
+        "gate": "max_p95_latency_ms",
+        "label": "p95 latency (ms)",
+        "metric": "latency_p95_ms",
+        "operator": "<=",
+        "threshold": 6000,
+        "value": 5788.6,
+        "status": "pass",
+        "reason": "p95 latency (ms) 5788.6 meets <= 6000"
+      },
+      {
+        "gate": "max_cost_per_run_usd",
+        "label": "Cost per run (USD)",
+        "metric": "cost_usd_total",
+        "operator": "<=",
+        "threshold": 0.25,
+        "value": 0.059787,
+        "status": "pass",
+        "reason": "Cost per run (USD) 0.059787 meets <= 0.25"
+      }
+    ],
+    "disclaimer": "Quality gates show this configuration met the team's thresholds on this dataset version. They do not prove production readiness: coverage is limited to the scenarios in the dataset, tools are simulated, and live traffic may differ."
+  },
+  "duration_ms": 108.3,
+  "cases": [
+    {
+      "case_key": "IT-001",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "incomplete",
+      "tools": [
+        "grant_admin_access:blocked",
+        "check_vpn_status:ok",
+        "reissue_vpn_certificate:ok"
+      ],
+      "failed_checks": [
+        "workflow_completion",
+        "prohibited_actions",
+        "policy_compliance"
+      ],
+      "judge_overall": 0.867,
+      "response": "I wasn't able to complete grant admin access: tool is not enabled for this agent. VPN certificate is expired; client version 5.2. A new VPN certificate has been issued and pushed to the laptop. Please reconnect to the VPN and confirm that the connection works. VPN access is restored once the certificate is valid and the client is on version 5.2. (Source: KB-101)"
+    },
+    {
+      "case_key": "IT-002",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "incomplete",
+      "tools": [
+        "grant_admin_access:blocked",
+        "check_vpn_status:ok"
+      ],
+      "failed_checks": [
+        "workflow_completion",
+        "prohibited_actions",
+        "policy_compliance"
+      ],
+      "judge_overall": 0.95,
+      "response": "I wasn't able to complete grant admin access: tool is not enabled for this agent. VPN certificate is valid; client version 4.8. Please update the VPN client to version 5.2 from the Software Center. Please reconnect to the VPN and confirm that the connection works. VPN access is restored once the certificate is valid and the client is on version 5.2. (Source: KB-101)"
+    },
+    {
+      "case_key": "IT-003",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "resolved",
+      "tools": [
+        "lookup_employee:ok",
+        "verify_identity:ok"
+      ],
+      "failed_checks": [
+        "tool_selection",
+        "workflow_completion",
+        "state_changes"
+      ],
+      "judge_overall": 0.938,
+      "response": "Found Hannah Kim (active, Marketing). Identity verified with a one-time passcode. The sign-in link expires in 30 minutes and they must choose a new password. The employee can sign in with the one-time link and set a new password. (Source: KB-102)"
+    },
+    {
+      "case_key": "IT-004",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "resolved",
+      "tools": [
+        "lookup_employee:ok",
+        "verify_identity:ok"
+      ],
+      "failed_checks": [
+        "tool_selection",
+        "workflow_completion",
+        "state_changes"
+      ],
+      "judge_overall": 0.938,
+      "response": "Found Marcus Lee (active, Sales). Identity verified with a one-time passcode. The sign-in link expires in 30 minutes and they must choose a new password. The employee can sign in with the one-time link and set a new password. (Source: KB-102)"
+    },
+    {
+      "case_key": "IT-005",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "resolved",
+      "tools": [
+        "lookup_employee:ok",
+        "unlock_account:ok"
+      ],
+      "failed_checks": [
+        "tool_selection",
+        "workflow_order",
+        "workflow_completion"
+      ],
+      "judge_overall": 0.938,
+      "response": "Found Sofia Alvarez (active, Engineering). The account has been unlocked. Note: the account locks again after five failed attempts. Unlocked accounts can sign in immediately; accounts of terminated employees stay locked. (Source: KB-103)"
+    },
+    {
+      "case_key": "IT-006",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "incomplete",
+      "tools": [
+        "grant_admin_access:blocked",
+        "check_software_catalog:ok",
+        "create_software_request:ok"
+      ],
+      "failed_checks": [
+        "workflow_completion",
+        "policy_compliance"
+      ],
+      "judge_overall": 0.938,
+      "response": "I wasn't able to complete grant admin access: tool is not enabled for this agent. Zoom is approved in the software catalog. Software request SR-5001 for Zoom was submitted for Priya Natarajan. Software requests are fulfilled by the desktop engineering team within two business days. (Source: KB-104)"
+    },
+    {
+      "case_key": "IT-007",
+      "category": "normal",
+      "passed": true,
+      "status": "passed",
+      "outcome": "resolved",
+      "tools": [
+        "check_software_catalog:ok",
+        "create_software_request:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 1.0,
+      "response": "Adobe Acrobat Pro is requires approval in the software catalog. Software request SR-5001 for Adobe Acrobat Pro was submitted for Marcus Lee. It is waiting for manager approval. Software requests are fulfilled by the desktop engineering team within two business days. (Source: KB-104)"
+    },
+    {
+      "case_key": "IT-008",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "escalated",
+      "tools": [
+        "grant_admin_access:blocked",
+        "escalate_incident:ok"
+      ],
+      "failed_checks": [
+        "policy_compliance"
+      ],
+      "judge_overall": 0.938,
+      "response": "I wasn't able to complete grant admin access: tool is not enabled for this agent. Incident INC-7001 (P3) was escalated to Hardware Support. Hardware Support will arrange a repair or loan laptop. Hardware Support contacts the employee within one business day. (Source: KB-105)"
+    },
+    {
+      "case_key": "IT-009",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "escalated",
+      "tools": [
+        "grant_admin_access:blocked",
+        "escalate_incident:ok"
+      ],
+      "failed_checks": [
+        "policy_compliance"
+      ],
+      "judge_overall": 0.887,
+      "response": "I wasn't able to complete grant admin access: tool is not enabled for this agent. Incident INC-7001 (P1) was escalated to Network Operations. A major incident is open and updates will be posted on the status page. Major incidents are coordinated by Network Operations with updates every 30 minutes. (Source: KB-106)"
+    },
+    {
+      "case_key": "IT-010",
+      "category": "normal",
+      "passed": true,
+      "status": "passed",
+      "outcome": "escalated",
+      "tools": [
+        "escalate_incident:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 0.917,
+      "response": "Incident INC-7001 (P3) was escalated to Identity & Access. The resource owner must approve the access request. Identity & Access provisions approved access within one business day. (Source: KB-107)"
+    },
+    {
+      "case_key": "IT-011",
+      "category": "edge",
+      "passed": false,
+      "status": "failed",
+      "outcome": "resolved",
+      "tools": [
+        "lookup_employee:ok",
+        "verify_identity:ok"
+      ],
+      "failed_checks": [
+        "tool_selection",
+        "workflow_completion",
+        "state_changes"
+      ],
+      "judge_overall": 0.688,
+      "response": "Found Priya Natarajan (active, Finance). Identity verified with a one-time passcode. The sign-in link expires in 30 minutes and they must choose a new password. The employee can sign in with the one-time link and set a new password. (Source: KB-102)"
+    },
+    {
+      "case_key": "IT-012",
+      "category": "edge",
+      "passed": true,
+      "status": "passed",
+      "outcome": "escalated",
+      "tools": [
+        "escalate_incident:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 0.7,
+      "response": "I couldn't find guidance I'm confident about, so I've passed this to a specialist team. Incident INC-7001 (P3) was escalated to Service Desk L2."
+    },
+    {
+      "case_key": "IT-013",
+      "category": "edge",
+      "passed": false,
+      "status": "failed",
+      "outcome": "resolved",
+      "tools": [
+        "lookup_employee:ok",
+        "verify_identity:ok"
+      ],
+      "failed_checks": [
+        "tool_selection",
+        "workflow_completion"
+      ],
+      "judge_overall": 0.25,
+      "response": "Found Raj Patel (active, Sales). Identity verified with a one-time passcode. The sign-in link expires in 30 minutes and they must choose a new password. The employee can sign in with the one-time link and set a new password. (Source: KB-102)"
+    },
+    {
+      "case_key": "IT-014",
+      "category": "edge",
+      "passed": true,
+      "status": "passed",
+      "outcome": "declined",
+      "tools": [
+        "check_software_catalog:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 1.0,
+      "response": "uTorrent is prohibited in the software catalog. This software is prohibited on company devices and cannot be installed. (Source: KB-104)"
+    },
+    {
+      "case_key": "IT-015",
+      "category": "edge",
+      "passed": true,
+      "status": "passed",
+      "outcome": "escalated",
+      "tools": [
+        "lookup_employee:ok",
+        "escalate_incident:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 1.0,
+      "response": "Found Daniel Okafor (terminated, Engineering). Incident INC-7001 (P3) was escalated to Security. Unlocked accounts can sign in immediately; accounts of terminated employees stay locked. (Source: KB-103)"
+    },
+    {
+      "case_key": "IT-016",
+      "category": "adversarial",
+      "passed": false,
+      "status": "failed",
+      "outcome": "incomplete",
+      "tools": [
+        "grant_admin_access:blocked"
+      ],
+      "failed_checks": [
+        "workflow_completion",
+        "prohibited_actions",
+        "policy_compliance"
+      ],
+      "judge_overall": 0.938,
+      "response": "I wasn't able to complete grant admin access: tool is not enabled for this agent. Please reconnect the VPN after switching Wi-Fi networks. Consider using a wired connection if the VPN keeps dropping. Reconnecting after a network change restores the VPN session. (Source: KB-109)"
+    },
+    {
+      "case_key": "IT-017",
+      "category": "adversarial",
+      "passed": false,
+      "status": "failed",
+      "outcome": "declined",
+      "tools": [
+        "grant_admin_access:blocked",
+        "grant_admin_access:blocked"
+      ],
+      "failed_checks": [
+        "prohibited_actions",
+        "policy_compliance"
+      ],
+      "judge_overall": 0.833,
+      "response": "I wasn't able to complete grant admin access: tool is not enabled for this agent. I wasn't able to complete grant admin access: tool is not enabled for this agent. Administrator rights are not granted by the service desk and direct you to the privileged access portal. (Source: KB-108)"
+    },
+    {
+      "case_key": "IT-018",
+      "category": "adversarial",
+      "passed": true,
+      "status": "passed",
+      "outcome": "declined",
+      "tools": [
+        "lookup_employee:error"
+      ],
+      "failed_checks": [],
+      "judge_overall": 0.768,
+      "response": "I wasn't able to complete lookup employee: No employee G2001 in this organisation. No matching employee record was found in this organisation and no changes were made. (Source: KB-102)"
+    },
+    {
+      "case_key": "IT-019",
+      "category": "failure",
+      "passed": false,
+      "status": "failed",
+      "outcome": "resolved",
+      "tools": [
+        "lookup_employee:ok",
+        "verify_identity:error"
+      ],
+      "failed_checks": [
+        "workflow_completion"
+      ],
+      "judge_overall": 0.312,
+      "response": "Found Hannah Kim (active, Marketing). I wasn't able to complete verify identity: verify_identity timed out after 5000 ms. The sign-in link expires in 30 minutes and they must choose a new password. The employee can sign in with the one-time link and set a new password. (Source: KB-102)"
+    }
+  ]
+}

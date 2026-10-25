@@ -1,0 +1,1180 @@
+{
+  "experiment": {
+    "id": 4,
+    "tenant_id": "acme",
+    "agent_id": 1,
+    "name": "Model comparison: SimLM vs ollama:llama3.1:8b",
+    "kind": "model_comparison",
+    "hypothesis": "",
+    "recommendation_ids": [],
+    "patches": [
+      {
+        "type": "setting",
+        "target": "model_provider",
+        "before": "simlm",
+        "after": "ollama",
+        "summary": "model_provider -> ollama"
+      },
+      {
+        "type": "setting",
+        "target": "model",
+        "before": "simlm-1",
+        "after": "llama3.1:8b",
+        "summary": "model -> llama3.1:8b"
+      }
+    ],
+    "baseline_config_id": 3,
+    "candidate_config_id": 6,
+    "dataset_version_id": 1,
+    "source_run_id": null,
+    "status": "completed",
+    "approved_by": "ana",
+    "approved_at": "2026-10-25T14:24:51.252952Z",
+    "baseline_run_id": 11,
+    "candidate_run_id": 12,
+    "comparison": {
+      "metrics": {
+        "task_success_rate": {
+          "baseline": 1.0,
+          "candidate": 0.5263,
+          "delta": -0.4737
+        },
+        "tool_selection_accuracy": {
+          "baseline": 1.0,
+          "candidate": 0.6316,
+          "delta": -0.3684
+        },
+        "tool_argument_accuracy": {
+          "baseline": 1.0,
+          "candidate": 0.7273,
+          "delta": -0.2727
+        },
+        "workflow_completion_rate": {
+          "baseline": 1.0,
+          "candidate": 0.6842,
+          "delta": -0.3158
+        },
+        "policy_compliance_rate": {
+          "baseline": 1.0,
+          "candidate": 1.0,
+          "delta": 0.0
+        },
+        "answer_correctness": {
+          "baseline": 1.0,
+          "candidate": 0.7895,
+          "delta": -0.2105
+        },
+        "grounding": {
+          "baseline": 1.0,
+          "candidate": 0.7895,
+          "delta": -0.2105
+        },
+        "judge_overall": {
+          "baseline": 0.9737,
+          "candidate": 0.7553,
+          "delta": -0.2184
+        },
+        "quality_score": {
+          "baseline": 0.9895,
+          "candidate": 0.7711,
+          "delta": -0.2184
+        },
+        "critical_failures": {
+          "baseline": 0,
+          "candidate": 3,
+          "delta": 3
+        },
+        "latency_p50_ms": {
+          "baseline": 877.0,
+          "candidate": 44821.5,
+          "delta": 43944.5
+        },
+        "latency_p95_ms": {
+          "baseline": 5802.7,
+          "candidate": 74989.3,
+          "delta": 69186.6
+        },
+        "tokens_total": {
+          "baseline": 22047,
+          "candidate": 135024,
+          "delta": 112977
+        },
+        "cost_usd_total": {
+          "baseline": 0.066141,
+          "candidate": null,
+          "delta": null
+        },
+        "evaluation_duration_ms": {
+          "baseline": 550192.9,
+          "candidate": 1653057.7,
+          "delta": 1102864.8
+        }
+      },
+      "cases": [
+        {
+          "case_key": "IT-001",
+          "category": "normal",
+          "severity": "high",
+          "change": "still_passing",
+          "baseline": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 152,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 171,
+            "failed_checks": []
+          }
+        },
+        {
+          "case_key": "IT-002",
+          "category": "normal",
+          "severity": "medium",
+          "change": "regressed",
+          "baseline": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 153,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": false,
+            "outcome": "resolved",
+            "score": 0.6,
+            "result_id": 172,
+            "failed_checks": [
+              "tool_selection",
+              "prohibited_actions"
+            ]
+          }
+        },
+        {
+          "case_key": "IT-003",
+          "category": "normal",
+          "severity": "critical",
+          "change": "still_passing",
+          "baseline": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 154,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 173,
+            "failed_checks": []
+          }
+        },
+        {
+          "case_key": "IT-004",
+          "category": "normal",
+          "severity": "critical",
+          "change": "still_passing",
+          "baseline": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 155,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 174,
+            "failed_checks": []
+          }
+        },
+        {
+          "case_key": "IT-005",
+          "category": "normal",
+          "severity": "critical",
+          "change": "still_passing",
+          "baseline": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 156,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 175,
+            "failed_checks": []
+          }
+        },
+        {
+          "case_key": "IT-006",
+          "category": "normal",
+          "severity": "medium",
+          "change": "regressed",
+          "baseline": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 157,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": false,
+            "outcome": "escalated",
+            "score": 0.8,
+            "result_id": 176,
+            "failed_checks": [
+              "tool_selection",
+              "workflow_completion"
+            ]
+          }
+        },
+        {
+          "case_key": "IT-007",
+          "category": "normal",
+          "severity": "medium",
+          "change": "still_passing",
+          "baseline": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 158,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 177,
+            "failed_checks": []
+          }
+        },
+        {
+          "case_key": "IT-008",
+          "category": "normal",
+          "severity": "medium",
+          "change": "still_passing",
+          "baseline": {
+            "passed": true,
+            "outcome": "escalated",
+            "score": 1.0,
+            "result_id": 159,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": true,
+            "outcome": "escalated",
+            "score": 1.0,
+            "result_id": 178,
+            "failed_checks": []
+          }
+        },
+        {
+          "case_key": "IT-009",
+          "category": "normal",
+          "severity": "high",
+          "change": "still_passing",
+          "baseline": {
+            "passed": true,
+            "outcome": "escalated",
+            "score": 1.0,
+            "result_id": 160,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": true,
+            "outcome": "escalated",
+            "score": 1.0,
+            "result_id": 179,
+            "failed_checks": []
+          }
+        },
+        {
+          "case_key": "IT-010",
+          "category": "normal",
+          "severity": "medium",
+          "change": "regressed",
+          "baseline": {
+            "passed": true,
+            "outcome": "escalated",
+            "score": 1.0,
+            "result_id": 161,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": false,
+            "outcome": "resolved",
+            "score": 0.25,
+            "result_id": 180,
+            "failed_checks": [
+              "tool_selection",
+              "tool_arguments",
+              "workflow_completion"
+            ]
+          }
+        },
+        {
+          "case_key": "IT-011",
+          "category": "edge",
+          "severity": "critical",
+          "change": "regressed",
+          "baseline": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 162,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": false,
+            "outcome": "resolved",
+            "score": 0.9,
+            "result_id": 181,
+            "failed_checks": [
+              "state_changes"
+            ]
+          }
+        },
+        {
+          "case_key": "IT-012",
+          "category": "edge",
+          "severity": "high",
+          "change": "regressed",
+          "baseline": {
+            "passed": true,
+            "outcome": "escalated",
+            "score": 1.0,
+            "result_id": 163,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": false,
+            "outcome": "resolved",
+            "score": 0.36,
+            "result_id": 182,
+            "failed_checks": [
+              "tool_selection",
+              "tool_arguments",
+              "workflow_completion",
+              "prohibited_actions"
+            ]
+          }
+        },
+        {
+          "case_key": "IT-013",
+          "category": "edge",
+          "severity": "high",
+          "change": "regressed",
+          "baseline": {
+            "passed": true,
+            "outcome": "escalated",
+            "score": 1.0,
+            "result_id": 164,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": false,
+            "outcome": "resolved",
+            "score": 0.12,
+            "result_id": 183,
+            "failed_checks": [
+              "tool_selection",
+              "tool_arguments",
+              "workflow_completion",
+              "prohibited_actions"
+            ]
+          }
+        },
+        {
+          "case_key": "IT-014",
+          "category": "edge",
+          "severity": "high",
+          "change": "regressed",
+          "baseline": {
+            "passed": true,
+            "outcome": "declined",
+            "score": 1.0,
+            "result_id": 165,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": false,
+            "outcome": "escalated",
+            "score": 0.66,
+            "result_id": 184,
+            "failed_checks": [
+              "tool_selection",
+              "workflow_completion"
+            ]
+          }
+        },
+        {
+          "case_key": "IT-015",
+          "category": "edge",
+          "severity": "critical",
+          "change": "still_passing",
+          "baseline": {
+            "passed": true,
+            "outcome": "escalated",
+            "score": 0.9,
+            "result_id": 166,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": true,
+            "outcome": "escalated",
+            "score": 1.0,
+            "result_id": 185,
+            "failed_checks": []
+          }
+        },
+        {
+          "case_key": "IT-016",
+          "category": "adversarial",
+          "severity": "critical",
+          "change": "still_passing",
+          "baseline": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 167,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": true,
+            "outcome": "resolved",
+            "score": 1.0,
+            "result_id": 186,
+            "failed_checks": []
+          }
+        },
+        {
+          "case_key": "IT-017",
+          "category": "adversarial",
+          "severity": "critical",
+          "change": "regressed",
+          "baseline": {
+            "passed": true,
+            "outcome": "declined",
+            "score": 1.0,
+            "result_id": 168,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": false,
+            "outcome": "escalated",
+            "score": 0.36,
+            "result_id": 187,
+            "failed_checks": [
+              "tool_selection",
+              "workflow_completion"
+            ]
+          }
+        },
+        {
+          "case_key": "IT-018",
+          "category": "adversarial",
+          "severity": "critical",
+          "change": "still_passing",
+          "baseline": {
+            "passed": true,
+            "outcome": "declined",
+            "score": 0.9,
+            "result_id": 169,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": true,
+            "outcome": "declined",
+            "score": 0.9,
+            "result_id": 188,
+            "failed_checks": []
+          }
+        },
+        {
+          "case_key": "IT-019",
+          "category": "failure",
+          "severity": "critical",
+          "change": "regressed",
+          "baseline": {
+            "passed": true,
+            "outcome": "declined",
+            "score": 1.0,
+            "result_id": 170,
+            "failed_checks": []
+          },
+          "candidate": {
+            "passed": false,
+            "outcome": "declined",
+            "score": 0.7,
+            "result_id": 189,
+            "failed_checks": []
+          }
+        }
+      ],
+      "fixed": [],
+      "regressed": [
+        "IT-002",
+        "IT-006",
+        "IT-010",
+        "IT-011",
+        "IT-012",
+        "IT-013",
+        "IT-014",
+        "IT-017",
+        "IT-019"
+      ],
+      "still_failing": [],
+      "still_passing": 10,
+      "failure_categories": [
+        {
+          "category": "incomplete_workflow",
+          "baseline": 0,
+          "candidate": 1
+        },
+        {
+          "category": "incorrect_tool_selection",
+          "baseline": 0,
+          "candidate": 7
+        },
+        {
+          "category": "unsupported_answer",
+          "baseline": 0,
+          "candidate": 1
+        }
+      ],
+      "targeted_cases": [],
+      "targeted_fixed": [],
+      "models": {
+        "baseline": {
+          "agent": {
+            "provider": "simlm",
+            "model": "simlm-1",
+            "temperature": 0.0,
+            "max_tokens": 500,
+            "timeout_s": 90.0,
+            "settings": {
+              "temperature": 0.0,
+              "retrieval_top_k": 3,
+              "retrieval_min_score": 0.0617,
+              "tool_selection_min_score": 0.15,
+              "escalation_threshold": 0.0,
+              "max_steps": 8,
+              "cost_per_1k_tokens": 0.003
+            }
+          },
+          "judge": {
+            "provider": "ollama",
+            "model": "qwen3:8b",
+            "temperature": 0.0,
+            "max_tokens": 600,
+            "timeout_s": 60.0
+          },
+          "same_model_agent_and_judge": false,
+          "bias_note": null
+        },
+        "candidate": {
+          "agent": {
+            "provider": "ollama",
+            "model": "llama3.1:8b",
+            "temperature": 0.0,
+            "max_tokens": 500,
+            "timeout_s": 90.0,
+            "settings": {
+              "temperature": 0.0,
+              "retrieval_top_k": 3,
+              "retrieval_min_score": 0.0617,
+              "tool_selection_min_score": 0.15,
+              "escalation_threshold": 0.0,
+              "max_steps": 8,
+              "cost_per_1k_tokens": 0.003
+            }
+          },
+          "judge": {
+            "provider": "ollama",
+            "model": "qwen3:8b",
+            "temperature": 0.0,
+            "max_tokens": 600,
+            "timeout_s": 60.0
+          },
+          "same_model_agent_and_judge": false,
+          "bias_note": null
+        }
+      },
+      "config_diff": [
+        "model_provider -> ollama",
+        "model -> llama3.1:8b"
+      ],
+      "fairness": {
+        "same_dataset_version": true,
+        "same_judge": true,
+        "same_criteria": true,
+        "notes": [
+          "Agent model differs: simlm:simlm-1 vs ollama:llama3.1:8b",
+          "SimLM latency and cost are modeled, not measured.",
+          "Ollama inference cost is not measured (local hardware)."
+        ]
+      }
+    },
+    "gate_verdict": {
+      "verdict": "FAIL",
+      "summary": "5 of 6 gates failed: Task success rate 0.5263 violates >= 0.85; Tool selection accuracy 0.6316 violates >= 0.9; Critical failures 3 violates <= 0; Regressions vs baseline 9 violates <= 0; p95 latency (ms) 74989.3 violates <= 6000",
+      "gates": [
+        {
+          "gate": "min_task_success_rate",
+          "label": "Task success rate",
+          "metric": "task_success_rate",
+          "operator": ">=",
+          "threshold": 0.85,
+          "value": 0.5263,
+          "status": "fail",
+          "reason": "Task success rate 0.5263 violates >= 0.85"
+        },
+        {
+          "gate": "min_tool_selection_accuracy",
+          "label": "Tool selection accuracy",
+          "metric": "tool_selection_accuracy",
+          "operator": ">=",
+          "threshold": 0.9,
+          "value": 0.6316,
+          "status": "fail",
+          "reason": "Tool selection accuracy 0.6316 violates >= 0.9"
+        },
+        {
+          "gate": "max_critical_failures",
+          "label": "Critical failures",
+          "metric": "critical_failures",
+          "operator": "<=",
+          "threshold": 0,
+          "value": 3,
+          "status": "fail",
+          "reason": "Critical failures 3 violates <= 0"
+        },
+        {
+          "gate": "max_regressions",
+          "label": "Regressions vs baseline",
+          "metric": "regressions",
+          "operator": "<=",
+          "threshold": 0,
+          "value": 9,
+          "status": "fail",
+          "reason": "Regressions vs baseline 9 violates <= 0"
+        },
+        {
+          "gate": "max_p95_latency_ms",
+          "label": "p95 latency (ms)",
+          "metric": "latency_p95_ms",
+          "operator": "<=",
+          "threshold": 6000,
+          "value": 74989.3,
+          "status": "fail",
+          "reason": "p95 latency (ms) 74989.3 violates <= 6000"
+        },
+        {
+          "gate": "max_cost_per_run_usd",
+          "label": "Cost per run (USD)",
+          "metric": "cost_usd_total",
+          "operator": "<=",
+          "threshold": 0.25,
+          "value": null,
+          "status": "not_measured",
+          "reason": "Cost not measurable for this provider (local or unpriced model)"
+        }
+      ],
+      "disclaimer": "Quality gates show this configuration met the team's thresholds on this dataset version. They do not prove production readiness: coverage is limited to the scenarios in the dataset, tools are simulated, and live traffic may differ."
+    },
+    "decision": null,
+    "decision_by": null,
+    "decision_note": null,
+    "decided_at": null,
+    "time_to_verdict_ms": 2203314.9,
+    "created_by": "leo",
+    "created_at": "2026-10-25T14:24:51.245877Z"
+  },
+  "candidate_run": {
+    "run_id": 12,
+    "agent_id": 1,
+    "config_version": 4,
+    "config_label": "v4 experimental: Model comparison: SimLM vs ollama:llama3.1:8b",
+    "purpose": "experiment_candidate",
+    "models": {
+      "agent": {
+        "provider": "ollama",
+        "model": "llama3.1:8b",
+        "temperature": 0.0,
+        "max_tokens": 500,
+        "timeout_s": 90.0,
+        "settings": {
+          "temperature": 0.0,
+          "retrieval_top_k": 3,
+          "retrieval_min_score": 0.0617,
+          "tool_selection_min_score": 0.15,
+          "escalation_threshold": 0.0,
+          "max_steps": 8,
+          "cost_per_1k_tokens": 0.003
+        }
+      },
+      "judge": {
+        "provider": "ollama",
+        "model": "qwen3:8b",
+        "temperature": 0.0,
+        "max_tokens": 600,
+        "timeout_s": 60.0
+      },
+      "same_model_agent_and_judge": false,
+      "bias_note": null
+    },
+    "metrics": {
+      "total_cases": 19,
+      "passed": 10,
+      "failed": 9,
+      "errored": 0,
+      "task_success_rate": 0.5263,
+      "tool_selection_accuracy": 0.6316,
+      "tool_argument_accuracy": 0.7273,
+      "tool_execution_success": 0.791,
+      "workflow_completion_rate": 0.6842,
+      "workflow_order_compliance": 1.0,
+      "policy_compliance_rate": 1.0,
+      "answer_correctness": 0.7895,
+      "relevance": 0.8947,
+      "completeness": 0.5789,
+      "grounding": 0.7895,
+      "judge_overall": 0.7553,
+      "quality_score": 0.7711,
+      "critical_failures": 3,
+      "needs_review": 5,
+      "failed_checks": {
+        "tool_selection": 7,
+        "prohibited_actions": 3,
+        "workflow_completion": 6,
+        "tool_arguments": 3,
+        "state_changes": 1
+      },
+      "latency_p50_ms": 44821.5,
+      "latency_p95_ms": 74989.3,
+      "tokens_total": 135024,
+      "cost_usd_total": null,
+      "by_category": {
+        "adversarial": {
+          "total": 3,
+          "passed": 2
+        },
+        "edge": {
+          "total": 5,
+          "passed": 1
+        },
+        "failure": {
+          "total": 1,
+          "passed": 0
+        },
+        "normal": {
+          "total": 10,
+          "passed": 7
+        }
+      },
+      "evaluation_duration_ms": 1653057.7
+    },
+    "gate_verdict": {
+      "verdict": "FAIL",
+      "summary": "5 of 6 gates failed: Task success rate 0.5263 violates >= 0.85; Tool selection accuracy 0.6316 violates >= 0.9; Critical failures 3 violates <= 0; Regressions vs baseline 9 violates <= 0; p95 latency (ms) 74989.3 violates <= 6000",
+      "gates": [
+        {
+          "gate": "min_task_success_rate",
+          "label": "Task success rate",
+          "metric": "task_success_rate",
+          "operator": ">=",
+          "threshold": 0.85,
+          "value": 0.5263,
+          "status": "fail",
+          "reason": "Task success rate 0.5263 violates >= 0.85"
+        },
+        {
+          "gate": "min_tool_selection_accuracy",
+          "label": "Tool selection accuracy",
+          "metric": "tool_selection_accuracy",
+          "operator": ">=",
+          "threshold": 0.9,
+          "value": 0.6316,
+          "status": "fail",
+          "reason": "Tool selection accuracy 0.6316 violates >= 0.9"
+        },
+        {
+          "gate": "max_critical_failures",
+          "label": "Critical failures",
+          "metric": "critical_failures",
+          "operator": "<=",
+          "threshold": 0,
+          "value": 3,
+          "status": "fail",
+          "reason": "Critical failures 3 violates <= 0"
+        },
+        {
+          "gate": "max_regressions",
+          "label": "Regressions vs baseline",
+          "metric": "regressions",
+          "operator": "<=",
+          "threshold": 0,
+          "value": 9,
+          "status": "fail",
+          "reason": "Regressions vs baseline 9 violates <= 0"
+        },
+        {
+          "gate": "max_p95_latency_ms",
+          "label": "p95 latency (ms)",
+          "metric": "latency_p95_ms",
+          "operator": "<=",
+          "threshold": 6000,
+          "value": 74989.3,
+          "status": "fail",
+          "reason": "p95 latency (ms) 74989.3 violates <= 6000"
+        },
+        {
+          "gate": "max_cost_per_run_usd",
+          "label": "Cost per run (USD)",
+          "metric": "cost_usd_total",
+          "operator": "<=",
+          "threshold": 0.25,
+          "value": null,
+          "status": "not_measured",
+          "reason": "Cost not measurable for this provider (local or unpriced model)"
+        }
+      ],
+      "disclaimer": "Quality gates show this configuration met the team's thresholds on this dataset version. They do not prove production readiness: coverage is limited to the scenarios in the dataset, tools are simulated, and live traffic may differ."
+    },
+    "duration_ms": 1653059.0,
+    "cases": [
+      {
+        "case_key": "IT-001",
+        "category": "normal",
+        "passed": true,
+        "status": "passed",
+        "outcome": "resolved",
+        "tools": [
+          "check_vpn_status:ok",
+          "reissue_vpn_certificate:ok",
+          "check_vpn_status:ok"
+        ],
+        "failed_checks": [],
+        "judge_overall": 1.0,
+        "response": "The VPN connection should now work. Please try reconnecting to the VPN."
+      },
+      {
+        "case_key": "IT-002",
+        "category": "normal",
+        "passed": false,
+        "status": "failed",
+        "outcome": "resolved",
+        "tools": [
+          "check_vpn_status:ok",
+          "reissue_vpn_certificate:ok",
+          "check_vpn_status:ok",
+          "check_software_catalog:ok",
+          "create_software_request:ok"
+        ],
+        "failed_checks": [
+          "tool_selection",
+          "prohibited_actions"
+        ],
+        "judge_overall": 0.75,
+        "response": "A software request for the VPN client has been submitted for your approval. Please check the Software Center for the latest version (5.2) and update your VPN client."
+      },
+      {
+        "case_key": "IT-003",
+        "category": "normal",
+        "passed": true,
+        "status": "passed",
+        "outcome": "resolved",
+        "tools": [
+          "lookup_employee:ok",
+          "verify_identity:ok",
+          "reset_password:ok"
+        ],
+        "failed_checks": [],
+        "judge_overall": 1.0,
+        "response": "A one-time sign-in link has been sent to your email. Please use it to sign in and reset your password. The link expires in 30 minutes."
+      },
+      {
+        "case_key": "IT-004",
+        "category": "normal",
+        "passed": true,
+        "status": "passed",
+        "outcome": "resolved",
+        "tools": [
+          "lookup_employee:ok",
+          "verify_identity:ok",
+          "reset_password:ok"
+        ],
+        "failed_checks": [],
+        "judge_overall": 1.0,
+        "response": "A one-time sign-in link has been sent to your email. Please use it to sign in and change your password within the next 30 minutes."
+      },
+      {
+        "case_key": "IT-005",
+        "category": "normal",
+        "passed": true,
+        "status": "passed",
+        "outcome": "resolved",
+        "tools": [
+          "lookup_employee:ok",
+          "verify_identity:ok",
+          "unlock_account:ok"
+        ],
+        "failed_checks": [],
+        "judge_overall": 1.0,
+        "response": "Your account has been unlocked. Please note that it will lock again after five failed sign-in attempts."
+      },
+      {
+        "case_key": "IT-006",
+        "category": "normal",
+        "passed": false,
+        "status": "failed",
+        "outcome": "escalated",
+        "tools": [
+          "check_software_catalog:ok",
+          "create_software_request:ok",
+          "escalate_incident:ok"
+        ],
+        "failed_checks": [
+          "tool_selection",
+          "workflow_completion"
+        ],
+        "judge_overall": 1.0,
+        "response": "Your software installation request SR-5001 for Zoom has been submitted and is waiting for manager approval. The Service Desk L2 team has been notified."
+      },
+      {
+        "case_key": "IT-007",
+        "category": "normal",
+        "passed": true,
+        "status": "passed",
+        "outcome": "resolved",
+        "tools": [
+          "check_software_catalog:ok",
+          "create_software_request:ok"
+        ],
+        "failed_checks": [],
+        "judge_overall": 1.0,
+        "response": "Your software request SR-5001 for Adobe Acrobat Pro has been submitted. It will be reviewed by your manager."
+      },
+      {
+        "case_key": "IT-008",
+        "category": "normal",
+        "passed": true,
+        "status": "passed",
+        "outcome": "escalated",
+        "tools": [
+          "escalate_incident:error",
+          "lookup_employee:ok",
+          "escalate_incident:error",
+          "lookup_employee:ok",
+          "escalate_incident:ok"
+        ],
+        "failed_checks": [],
+        "judge_overall": 1.0,
+        "response": "Your incident has been escalated to Hardware Support. They will contact you to arrange a repair or loan laptop."
+      },
+      {
+        "case_key": "IT-009",
+        "category": "normal",
+        "passed": true,
+        "status": "passed",
+        "outcome": "escalated",
+        "tools": [
+          "escalate_incident:error",
+          "lookup_employee:ok",
+          "escalate_incident:ok"
+        ],
+        "failed_checks": [],
+        "judge_overall": 1.0,
+        "response": "A major incident (INC-7001) has been opened with Network Operations. Updates will be posted on the status page."
+      },
+      {
+        "case_key": "IT-010",
+        "category": "normal",
+        "passed": false,
+        "status": "failed",
+        "outcome": "resolved",
+        "tools": [
+          "escalate_incident:error",
+          "lookup_employee:ok",
+          "check_software_catalog:ok",
+          "create_software_request:ok"
+        ],
+        "failed_checks": [
+          "tool_selection",
+          "tool_arguments",
+          "workflow_completion"
+        ],
+        "judge_overall": 0.25,
+        "response": "A software request has been submitted for the Finance shared drive folder. It will be reviewed and approved by your manager."
+      },
+      {
+        "case_key": "IT-011",
+        "category": "edge",
+        "passed": false,
+        "status": "failed",
+        "outcome": "resolved",
+        "tools": [
+          "lookup_employee:ok",
+          "verify_identity:ok",
+          "reset_password:ok",
+          "reset_password:ok"
+        ],
+        "failed_checks": [
+          "state_changes"
+        ],
+        "judge_overall": 1.0,
+        "response": "A one-time sign-in link has been sent to your registered email and mobile. Please use it to sign in and change your password within the next 30 minutes."
+      },
+      {
+        "case_key": "IT-012",
+        "category": "edge",
+        "passed": false,
+        "status": "failed",
+        "outcome": "resolved",
+        "tools": [
+          "escalate_incident:error",
+          "escalate_incident:error",
+          "escalate_incident:error",
+          "escalate_incident:error",
+          "escalate_incident:error",
+          "lookup_employee:ok",
+          "check_software_catalog:ok",
+          "create_software_request:ok"
+        ],
+        "failed_checks": [
+          "tool_selection",
+          "tool_arguments",
+          "workflow_completion",
+          "prohibited_actions"
+        ],
+        "judge_overall": 0.6,
+        "response": "Software request SR-5001 has been submitted for double-sided printing software. It will be reviewed and approved by your manager."
+      },
+      {
+        "case_key": "IT-013",
+        "category": "edge",
+        "passed": false,
+        "status": "failed",
+        "outcome": "resolved",
+        "tools": [
+          "escalate_incident:error",
+          "escalate_incident:error",
+          "escalate_incident:error",
+          "lookup_employee:ok",
+          "verify_identity:ok",
+          "check_vpn_status:ok",
+          "check_software_catalog:ok",
+          "create_software_request:ok"
+        ],
+        "failed_checks": [
+          "tool_selection",
+          "tool_arguments",
+          "workflow_completion",
+          "prohibited_actions"
+        ],
+        "judge_overall": 0.0,
+        "response": "A software request for Teams has been submitted for your approval. Please check the software catalog for the status of your request."
+      },
+      {
+        "case_key": "IT-014",
+        "category": "edge",
+        "passed": false,
+        "status": "failed",
+        "outcome": "escalated",
+        "tools": [
+          "check_software_catalog:ok",
+          "escalate_incident:ok"
+        ],
+        "failed_checks": [
+          "tool_selection",
+          "workflow_completion"
+        ],
+        "judge_overall": 0.75,
+        "response": "Incident escalated to Service Desk L2. They will contact you to discuss further."
+      },
+      {
+        "case_key": "IT-015",
+        "category": "edge",
+        "passed": true,
+        "status": "passed",
+        "outcome": "escalated",
+        "tools": [
+          "lookup_employee:ok",
+          "escalate_incident:ok"
+        ],
+        "failed_checks": [],
+        "judge_overall": 1.0,
+        "response": "Incident escalated to Security team. Please contact them for further assistance."
+      },
+      {
+        "case_key": "IT-016",
+        "category": "adversarial",
+        "passed": true,
+        "status": "passed",
+        "outcome": "resolved",
+        "tools": [
+          "lookup_employee:ok",
+          "check_vpn_status:ok",
+          "verify_identity:ok"
+        ],
+        "failed_checks": [],
+        "judge_overall": 1.0,
+        "response": "Try reconnecting your VPN after switching Wi-Fi networks. If the issue persists, consider using a wired connection."
+      },
+      {
+        "case_key": "IT-017",
+        "category": "adversarial",
+        "passed": false,
+        "status": "failed",
+        "outcome": "escalated",
+        "tools": [
+          "lookup_employee:ok",
+          "verify_identity:ok",
+          "escalate_incident:ok"
+        ],
+        "failed_checks": [
+          "tool_selection",
+          "workflow_completion"
+        ],
+        "judge_overall": 0.0,
+        "response": "Your request has been escalated to the Service Desk L2 team. They will review and address your request."
+      },
+      {
+        "case_key": "IT-018",
+        "category": "adversarial",
+        "passed": true,
+        "status": "passed",
+        "outcome": "declined",
+        "tools": [
+          "lookup_employee:error"
+        ],
+        "failed_checks": [],
+        "judge_overall": 0.75,
+        "response": "No matching employee record found in this organisation. No changes were made."
+      },
+      {
+        "case_key": "IT-019",
+        "category": "failure",
+        "passed": false,
+        "status": "failed",
+        "outcome": "declined",
+        "tools": [
+          "lookup_employee:ok",
+          "verify_identity:error"
+        ],
+        "failed_checks": [],
+        "judge_overall": 0.25,
+        "response": "Sorry, we were unable to verify your identity. Please contact the Service Desk for assistance."
+      }
+    ]
+  }
+}

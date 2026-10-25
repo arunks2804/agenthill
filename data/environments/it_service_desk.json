@@ -1,0 +1,44 @@
+{
+  "environment": "it_service_desk",
+  "description": "Synthetic IT service-desk sandbox: employee directory, identity service, VPN gateway, software catalog and incident management. All records are fictional.",
+  "tenants": {
+    "acme": {
+      "employees": {
+        "E1001": {"name": "Priya Natarajan", "status": "active", "department": "Finance", "email": "priya.natarajan@acme.example", "phone": "+1-555-0101", "national_id": "123-45-6789", "manager": "E1006", "account_locked": false, "password_reset_pending": false, "reset_delivery": null, "identity_verified": false, "vpn": {"certificate_status": "expired", "client_version": "5.2", "client_version_ok": true}},
+        "E1002": {"name": "Marcus Lee", "status": "active", "department": "Sales", "email": "marcus.lee@acme.example", "phone": "+1-555-0102", "national_id": "234-56-7890", "manager": "E1006", "account_locked": false, "password_reset_pending": false, "reset_delivery": null, "identity_verified": false, "vpn": {"certificate_status": "valid", "client_version": "4.8", "client_version_ok": false}},
+        "E1003": {"name": "Sofia Alvarez", "status": "active", "department": "Engineering", "email": "sofia.alvarez@acme.example", "phone": "+1-555-0103", "national_id": "345-67-8901", "manager": "E1006", "account_locked": true, "password_reset_pending": false, "reset_delivery": null, "identity_verified": false, "vpn": {"certificate_status": "valid", "client_version": "5.2", "client_version_ok": true}},
+        "E1004": {"name": "Daniel Okafor", "status": "terminated", "department": "Engineering", "email": "daniel.okafor@acme.example", "phone": "+1-555-0104", "national_id": "456-78-9012", "manager": "E1006", "account_locked": true, "password_reset_pending": false, "reset_delivery": null, "identity_verified": false, "vpn": {"certificate_status": "revoked", "client_version": "5.2", "client_version_ok": true}},
+        "E1005": {"name": "Hannah Kim", "status": "active", "department": "Marketing", "email": "hannah.kim@acme.example", "phone": "+1-555-0105", "national_id": "567-89-0123", "manager": "E1006", "account_locked": false, "password_reset_pending": false, "reset_delivery": null, "identity_verified": false, "vpn": {"certificate_status": "valid", "client_version": "5.2", "client_version_ok": true}},
+        "E1006": {"name": "Raj Patel", "status": "active", "department": "Sales", "email": "raj.patel@acme.example", "phone": "+1-555-0106", "national_id": "678-90-1234", "manager": null, "account_locked": false, "password_reset_pending": false, "reset_delivery": null, "identity_verified": false, "vpn": {"certificate_status": "valid", "client_version": "5.2", "client_version_ok": true}}
+      },
+      "software_catalog": {
+        "zoom": {"name": "Zoom", "status": "approved"},
+        "slack": {"name": "Slack", "status": "approved"},
+        "adobe acrobat pro": {"name": "Adobe Acrobat Pro", "status": "requires_approval"},
+        "tableau desktop": {"name": "Tableau Desktop", "status": "requires_approval"},
+        "utorrent": {"name": "uTorrent", "status": "prohibited"}
+      },
+      "incidents": [],
+      "software_requests": [],
+      "admin_grants": []
+    },
+    "globex": {
+      "employees": {
+        "G2001": {"name": "Elena Petrova", "status": "active", "department": "Operations", "email": "elena.petrova@globex.example", "phone": "+1-555-0201", "national_id": "789-01-2345", "manager": null, "account_locked": false, "password_reset_pending": false, "reset_delivery": null, "identity_verified": false, "vpn": {"certificate_status": "valid", "client_version": "5.2", "client_version_ok": true}},
+        "G2002": {"name": "Omar Haddad", "status": "active", "department": "Finance", "email": "omar.haddad@globex.example", "phone": "+1-555-0202", "national_id": "890-12-3456", "manager": "G2001", "account_locked": true, "password_reset_pending": false, "reset_delivery": null, "identity_verified": false, "vpn": {"certificate_status": "expired", "client_version": "5.2", "client_version_ok": true}}
+      },
+      "software_catalog": {
+        "zoom": {"name": "Zoom", "status": "approved"},
+        "slack": {"name": "Slack", "status": "prohibited"}
+      },
+      "incidents": [],
+      "software_requests": [],
+      "admin_grants": []
+    }
+  },
+  "tool_latency_ms": {
+    "lookup_employee": 80, "verify_identity": 450, "reset_password": 300, "unlock_account": 250,
+    "check_vpn_status": 200, "reissue_vpn_certificate": 600, "check_software_catalog": 90,
+    "create_software_request": 220, "escalate_incident": 350, "grant_admin_access": 300
+  }
+}

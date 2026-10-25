@@ -1,0 +1,156 @@
+{
+  "clusters": [
+    {
+      "cases": [
+        "HR-012"
+      ],
+      "evidence": [
+        {
+          "result_id": 127,
+          "case_key": "HR-012",
+          "span_seq": null,
+          "text": "unexpected write tools called: escalate_to_hr_partner",
+          "id": "E1"
+        },
+        {
+          "result_id": 127,
+          "case_key": "HR-012",
+          "span_seq": null,
+          "text": "Judge scores below threshold: ['grounding=0.0']",
+          "id": "E2"
+        }
+      ],
+      "severity": "critical",
+      "key": "incomplete_workflow:unexplained",
+      "category": "incomplete_workflow",
+      "category_label": "Incomplete workflow (cause unclear)",
+      "hypothesis": "The trace does not contain enough evidence to identify a cause.",
+      "confidence": "low",
+      "details": {
+        "steps": []
+      },
+      "investigate": "Inspect the full trace and the judge rationale; consider adding a targeted test case.",
+      "frequency": 1,
+      "trace_refs": [
+        {
+          "case_key": "HR-012",
+          "result_id": 127
+        }
+      ]
+    },
+    {
+      "cases": [
+        "HR-001",
+        "HR-002",
+        "HR-009"
+      ],
+      "evidence": [
+        {
+          "result_id": 116,
+          "case_key": "HR-001",
+          "span_seq": 5,
+          "text": "Top article HR-201 scored 0.1563 < escalation_threshold 0.2, so the agent escalated",
+          "id": "E1"
+        },
+        {
+          "result_id": 116,
+          "case_key": "HR-001",
+          "span_seq": null,
+          "text": "Expected outcome was resolved",
+          "id": "E2"
+        },
+        {
+          "result_id": 117,
+          "case_key": "HR-002",
+          "span_seq": 5,
+          "text": "Top article HR-201 scored 0.1036 < escalation_threshold 0.2, so the agent escalated",
+          "id": "E3"
+        },
+        {
+          "result_id": 117,
+          "case_key": "HR-002",
+          "span_seq": null,
+          "text": "Expected outcome was resolved",
+          "id": "E4"
+        },
+        {
+          "result_id": 124,
+          "case_key": "HR-009",
+          "span_seq": 5,
+          "text": "Top article HR-207 scored 0.0869 < escalation_threshold 0.2, so the agent escalated",
+          "id": "E5"
+        },
+        {
+          "result_id": 124,
+          "case_key": "HR-009",
+          "span_seq": null,
+          "text": "Expected outcome was resolved",
+          "id": "E6"
+        }
+      ],
+      "severity": "medium",
+      "key": "escalation_threshold",
+      "category": "unnecessary_escalation",
+      "category_label": "Unnecessary escalation",
+      "hypothesis": "The escalation threshold is above the retrieval scores of correctly matched policies, so answerable questions are escalated.",
+      "confidence": "high",
+      "details": {
+        "top_score": 0.0869,
+        "threshold": 0.2,
+        "steps": []
+      },
+      "investigate": null,
+      "frequency": 3,
+      "trace_refs": [
+        {
+          "case_key": "HR-001",
+          "result_id": 116
+        },
+        {
+          "case_key": "HR-002",
+          "result_id": 117
+        },
+        {
+          "case_key": "HR-009",
+          "result_id": 124
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "failed_cases": 4,
+    "clusters": 2,
+    "primary_distribution": {
+      "unnecessary_escalation": 3,
+      "incomplete_workflow": 1
+    },
+    "labeled_accuracy": {
+      "labeled_cases": 3,
+      "primary_accuracy": 1.0,
+      "any_match_rate": 1.0,
+      "rows": [
+        {
+          "case_key": "HR-001",
+          "label": "unnecessary_escalation",
+          "predicted": "unnecessary_escalation",
+          "primary_correct": true,
+          "in_any": true
+        },
+        {
+          "case_key": "HR-002",
+          "label": "unnecessary_escalation",
+          "predicted": "unnecessary_escalation",
+          "primary_correct": true,
+          "in_any": true
+        },
+        {
+          "case_key": "HR-009",
+          "label": "unnecessary_escalation",
+          "predicted": "unnecessary_escalation",
+          "primary_correct": true,
+          "in_any": true
+        }
+      ]
+    }
+  }
+}

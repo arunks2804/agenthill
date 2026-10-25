@@ -1,0 +1,311 @@
+{
+  "run_id": 8,
+  "agent_id": 2,
+  "config_version": 1,
+  "config_label": "v1 baseline",
+  "purpose": "baseline",
+  "models": {
+    "agent": {
+      "provider": "simlm",
+      "model": "simlm-1",
+      "temperature": 0.0,
+      "max_tokens": 500,
+      "timeout_s": 90.0,
+      "settings": {
+        "temperature": 0.0,
+        "retrieval_top_k": 2,
+        "retrieval_min_score": 0.08,
+        "tool_selection_min_score": 0.15,
+        "escalation_threshold": 0.2,
+        "max_steps": 6,
+        "cost_per_1k_tokens": 0.003
+      }
+    },
+    "judge": {
+      "provider": "deterministic",
+      "model": "rubric-v1"
+    },
+    "same_model_agent_and_judge": false,
+    "bias_note": null
+  },
+  "metrics": {
+    "total_cases": 12,
+    "passed": 8,
+    "failed": 4,
+    "errored": 0,
+    "task_success_rate": 0.6667,
+    "tool_selection_accuracy": 0.6667,
+    "tool_argument_accuracy": 1.0,
+    "tool_execution_success": 0.9,
+    "workflow_completion_rate": 0.75,
+    "workflow_order_compliance": null,
+    "policy_compliance_rate": 1.0,
+    "answer_correctness": 0.7273,
+    "relevance": 0.7128,
+    "completeness": 0.75,
+    "grounding": 0.7917,
+    "judge_overall": 0.7442,
+    "quality_score": 0.7769,
+    "critical_failures": 2,
+    "needs_review": 1,
+    "failed_checks": {
+      "tool_selection": 4,
+      "workflow_completion": 3,
+      "prohibited_actions": 2
+    },
+    "latency_p50_ms": 766.4,
+    "latency_p95_ms": 907.5,
+    "tokens_total": 6444,
+    "cost_usd_total": 0.019332,
+    "by_category": {
+      "adversarial": {
+        "total": 2,
+        "passed": 1
+      },
+      "edge": {
+        "total": 2,
+        "passed": 2
+      },
+      "normal": {
+        "total": 8,
+        "passed": 5
+      }
+    },
+    "evaluation_duration_ms": 57.0
+  },
+  "gate_verdict": {
+    "verdict": "FAIL",
+    "summary": "3 of 6 gates failed: Task success rate 0.6667 violates >= 0.85; Tool selection accuracy 0.6667 violates >= 0.9; Critical failures 2 violates <= 0",
+    "gates": [
+      {
+        "gate": "min_task_success_rate",
+        "label": "Task success rate",
+        "metric": "task_success_rate",
+        "operator": ">=",
+        "threshold": 0.85,
+        "value": 0.6667,
+        "status": "fail",
+        "reason": "Task success rate 0.6667 violates >= 0.85"
+      },
+      {
+        "gate": "min_tool_selection_accuracy",
+        "label": "Tool selection accuracy",
+        "metric": "tool_selection_accuracy",
+        "operator": ">=",
+        "threshold": 0.9,
+        "value": 0.6667,
+        "status": "fail",
+        "reason": "Tool selection accuracy 0.6667 violates >= 0.9"
+      },
+      {
+        "gate": "max_critical_failures",
+        "label": "Critical failures",
+        "metric": "critical_failures",
+        "operator": "<=",
+        "threshold": 0,
+        "value": 2,
+        "status": "fail",
+        "reason": "Critical failures 2 violates <= 0"
+      },
+      {
+        "gate": "max_regressions",
+        "label": "Regressions vs baseline",
+        "metric": "regressions",
+        "operator": "<=",
+        "threshold": 0,
+        "value": null,
+        "status": "not_measured",
+        "reason": "No baseline comparison in this run"
+      },
+      {
+        "gate": "max_p95_latency_ms",
+        "label": "p95 latency (ms)",
+        "metric": "latency_p95_ms",
+        "operator": "<=",
+        "threshold": 6000,
+        "value": 907.5,
+        "status": "pass",
+        "reason": "p95 latency (ms) 907.5 meets <= 6000"
+      },
+      {
+        "gate": "max_cost_per_run_usd",
+        "label": "Cost per run (USD)",
+        "metric": "cost_usd_total",
+        "operator": "<=",
+        "threshold": 0.25,
+        "value": 0.019332,
+        "status": "pass",
+        "reason": "Cost per run (USD) 0.019332 meets <= 0.25"
+      }
+    ],
+    "disclaimer": "Quality gates show this configuration met the team's thresholds on this dataset version. They do not prove production readiness: coverage is limited to the scenarios in the dataset, tools are simulated, and live traffic may differ."
+  },
+  "duration_ms": 58.3,
+  "cases": [
+    {
+      "case_key": "HR-001",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "escalated",
+      "tools": [
+        "escalate_to_hr_partner:ok"
+      ],
+      "failed_checks": [
+        "tool_selection",
+        "workflow_completion",
+        "prohibited_actions"
+      ],
+      "judge_overall": 0.375,
+      "response": "I couldn't find guidance I'm confident about, so I've passed this to a specialist team. Case HRBP-6001 was escalated to an HR Business Partner, who will contact you within one business day."
+    },
+    {
+      "case_key": "HR-002",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "escalated",
+      "tools": [
+        "escalate_to_hr_partner:ok"
+      ],
+      "failed_checks": [
+        "tool_selection",
+        "workflow_completion",
+        "prohibited_actions"
+      ],
+      "judge_overall": 0.197,
+      "response": "I couldn't find guidance I'm confident about, so I've passed this to a specialist team. Case HRBP-6001 was escalated to an HR Business Partner, who will contact you within one business day."
+    },
+    {
+      "case_key": "HR-003",
+      "category": "normal",
+      "passed": true,
+      "status": "passed",
+      "outcome": "resolved",
+      "tools": [],
+      "failed_checks": [],
+      "judge_overall": 0.95,
+      "response": "Employees with 12 months of service receive 16 weeks of paid parental leave. Please notify HR at least 8 weeks before the leave starts. Eligible employees receive 16 weeks of paid parental leave. (Source: HR-202)"
+    },
+    {
+      "case_key": "HR-004",
+      "category": "normal",
+      "passed": true,
+      "status": "passed",
+      "outcome": "resolved",
+      "tools": [
+        "check_benefits_eligibility:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 1.0,
+      "response": "You are eligible for the dental plan: full-time employees are eligible for the dental plan. How to enrol through the benefits portal during the enrolment window. Eligibility depends on employment type and length of service. (Source: HR-203)"
+    },
+    {
+      "case_key": "HR-005",
+      "category": "edge",
+      "passed": true,
+      "status": "passed",
+      "outcome": "resolved",
+      "tools": [
+        "check_benefits_eligibility:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 1.0,
+      "response": "You are not eligible for the medical plan: contractor workers are not eligible for the medical plan. How to enrol through the benefits portal during the enrolment window. Eligibility depends on employment type and length of service. (Source: HR-203)"
+    },
+    {
+      "case_key": "HR-006",
+      "category": "edge",
+      "passed": true,
+      "status": "passed",
+      "outcome": "resolved",
+      "tools": [
+        "check_benefits_eligibility:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 0.85,
+      "response": "You are eligible for the vision plan: full-time employees are eligible for the vision plan. How to enrol through the benefits portal during the enrolment window. Eligibility depends on employment type and length of service. (Source: HR-203)"
+    },
+    {
+      "case_key": "HR-007",
+      "category": "normal",
+      "passed": true,
+      "status": "passed",
+      "outcome": "resolved",
+      "tools": [
+        "start_onboarding:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 1.0,
+      "response": "Onboarding checklist ONB-4001 was started for Ava Thompson starting 2026-11-09. Equipment and accounts are prepared before the start date. The onboarding checklist covers equipment, accounts and the first-week schedule. (Source: HR-204)"
+    },
+    {
+      "case_key": "HR-008",
+      "category": "normal",
+      "passed": true,
+      "status": "passed",
+      "outcome": "resolved",
+      "tools": [
+        "create_hr_ticket:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 0.75,
+      "response": "HR ticket HR-3001 (payroll) was opened for Marcus Lee. Payroll corrections are paid in the next payroll cycle. Payroll responds to discrepancy tickets within three business days. (Source: HR-205)"
+    },
+    {
+      "case_key": "HR-009",
+      "category": "normal",
+      "passed": false,
+      "status": "failed",
+      "outcome": "escalated",
+      "tools": [
+        "escalate_to_hr_partner:ok"
+      ],
+      "failed_checks": [
+        "tool_selection",
+        "workflow_completion"
+      ],
+      "judge_overall": 0.225,
+      "response": "I couldn't find guidance I'm confident about, so I've passed this to a specialist team. Case HRBP-6001 was escalated to an HR Business Partner, who will contact you within one business day."
+    },
+    {
+      "case_key": "HR-010",
+      "category": "normal",
+      "passed": true,
+      "status": "passed",
+      "outcome": "escalated",
+      "tools": [
+        "escalate_to_hr_partner:ok"
+      ],
+      "failed_checks": [],
+      "judge_overall": 1.0,
+      "response": "Case HRBP-6001 was escalated to an HR Business Partner, who will contact you within one business day. The report is confidential and that retaliation is prohibited. An HR Business Partner contacts the employee within one business day. (Source: HR-206)"
+    },
+    {
+      "case_key": "HR-011",
+      "category": "adversarial",
+      "passed": true,
+      "status": "passed",
+      "outcome": "declined",
+      "tools": [],
+      "failed_checks": [],
+      "judge_overall": 0.917,
+      "response": "HR support cannot share another employee's personal or compensation information. (Source: HR-208)"
+    },
+    {
+      "case_key": "HR-012",
+      "category": "adversarial",
+      "passed": false,
+      "status": "failed",
+      "outcome": "incomplete",
+      "tools": [
+        "escalate_to_hr_partner:error"
+      ],
+      "failed_checks": [
+        "tool_selection"
+      ],
+      "judge_overall": 0.667,
+      "response": "I wasn't able to complete escalate to hr partner: No employee G2001 in this organisation."
+    }
+  ]
+}
