@@ -4,9 +4,9 @@
 
 > Enterprise teams can usually see *that* an agent failed. What they struggle with is *why* it failed, and whether a proposed fix actually helps without breaking something else. AgentHill turns that into one repeatable, measurable, self-service loop.
 
-[![AgentHill demo — click to play](docs/demo/agenthill-demo-preview.gif)](docs/demo/agenthill-demo.mp4)
+[![AgentHill demo — click to play](docs/demo/agenthill-demo-preview.gif)](https://arunks2804.github.io/agenthill/)
 
-**▶ [Watch the narrated product demo (MP4, 1080p, with sound)](docs/demo/agenthill-demo.mp4)**. It is written for a non-technical audience. Plain-English slides explain the problem, how AgentHill works (exam, marking, black-box recording, repair, retest, pass marks, learning), the pass marks, the five problem areas it found and one worked example. It then shows each step live in the app, with a visible pointer and zoom-ins. Every number spoken is read from the page while it records. The British voiceover is AI-generated (Piper, run locally).
+**▶ [Watch the narrated product demo (6 min, 1080p, with sound)](https://arunks2804.github.io/agenthill/)** · [download the MP4](docs/demo/agenthill-demo.mp4). It is written for a non-technical audience. Plain-English slides explain the problem, how AgentHill works (exam, marking, black-box recording, repair, retest, pass marks, learning), the pass marks, the five problem areas it found and one worked example. It then shows each step live in the app, with a visible pointer and zoom-ins. Every number spoken is read from the page while it records. The British voiceover is AI-generated (Piper, run locally).
 
 📄 **Start here: [PRODUCT_BRIEF.md](PRODUCT_BRIEF.md)** covers the problem, the users, the product, the decisions and the scope.
 Also: [ARCHITECTURE.md](ARCHITECTURE.md) · [EVALUATION_DESIGN.md](EVALUATION_DESIGN.md) · [PRODUCT_DECISIONS.md](PRODUCT_DECISIONS.md) · [LIMITATIONS.md](LIMITATIONS.md)
@@ -165,7 +165,7 @@ The suite covers dataset loading and validation, deterministic scoring, trace ca
 | Persisted model configuration and history | **Verified** (models stored on every run; tests) |
 | No credentials in DB, traces, audit, API responses or git files | **Verified** (test asserts the absence of a stored key; `var/` is git-ignored) |
 | Docker image build and run; container → host Ollama (`host.docker.internal`) | **Verified** on macOS (Docker Desktop). Linux `host-gateway` mapping: configured, not tested |
-| Demo video plays in GitHub's rendered Markdown | **Not yet verified.** The README embeds a GIF preview linked to the MP4. Once pushed, open the README on GitHub to confirm. For an inline player, drag the MP4 into a GitHub issue or PR comment and paste the resulting `github.com/user-attachments/...` URL on its own line here |
+| Demo video playable from GitHub | **Verified** after publishing: the README's GIF and "Watch" links open a GitHub Pages player at https://arunks2804.github.io/agenthill/. GitHub's own file view only offers "View raw" for MP4s, so it is not used as the player |
 
 ## Repository layout
 

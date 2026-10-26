@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AgentHill Demo</title>
+  <meta name="description" content="Narrated product demo of AgentHill, an AI agent evaluation and continuous improvement platform." />
+  <style>
+    :root { --bg: #0b1020; --panel: #111827; --ink: #f8fafc; --muted: #a5b4fc; --soft: #cbd5e1; --brand: #6366f1; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: radial-gradient(1200px 600px at 15% 0%, #312e81 0%, var(--bg) 60%); color: var(--ink);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; min-height: 100vh; }
+    main { max-width: 1200px; margin: 0 auto; padding: 40px 16px 56px; }
+    .kicker { color: var(--muted); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+    h1 { font-size: clamp(30px, 5vw, 46px); margin: 8px 0 10px; letter-spacing: -.02em; }
+    p.lead { color: var(--soft); font-size: clamp(16px, 2.2vw, 19px); line-height: 1.55; margin: 0 0 24px; max-width: 860px; }
+    .player { background: #000; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.5); border: 1px solid rgba(165,180,252,.25); }
+    video { display: block; width: 100%; height: auto; }
+    .meta { display: flex; flex-wrap: wrap; gap: 10px 24px; margin-top: 18px; color: var(--soft); font-size: 15px; }
+    .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    .links a { color: var(--ink); text-decoration: none; background: rgba(99,102,241,.18); border: 1px solid rgba(165,180,252,.45);
+      padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 15px; }
+    .links a.primary { background: var(--brand); border-color: var(--brand); }
+    .links a:hover { filter: brightness(1.15); }
+    ol { color: var(--soft); line-height: 1.7; font-size: 15px; padding-left: 22px; margin: 28px 0 0; }
+    ol b { color: var(--ink); }
+    .note { margin-top: 26px; font-size: 13px; color: #94a3b8; }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="kicker">Product demo · 6 minutes · with sound</div>
+    <h1>AgentHill</h1>
+    <p class="lead">A driving test, a mechanic and an annual inspection for AI assistants. Find out whether an AI assistant is doing the job correctly, why it fails, and whether a fix really makes it better, without breaking anything else.</p>
+    <div class="player">
+      <video controls preload="metadata" playsinline poster="screenshots/05-experiment-comparison.png">
+        <source src="demo/agenthill-demo.mp4" type="video/mp4" />
+        Your browser can't play this video. <a href="demo/agenthill-demo.mp4">Download the MP4</a>.
+      </video>
+    </div>
+    <div class="meta">
+      <span>1920×1080 · British voiceover</span>
+      <span>Live recording of the working application</span>
+    </div>
+    <ol>
+      <li><b>The exam:</b> 19 realistic IT helpdesk requests, the six pass marks, and the first version's result.</li>
+      <li><b>Finding out why:</b> the five problem areas, and why a password was never reset.</li>
+      <li><b>The repair:</b> specific, reviewable changes that a manager approves.</li>
+      <li><b>The retest:</b> old and new versions on the identical exam, from 32% to 95% correct.</li>
+      <li><b>Never repeating a mistake:</b> confirmed failures become permanent tests.</li>
+      <li><b>One platform, every department:</b> the same platform tests an HR assistant.</li>
+    </ol>
+    <div class="links">
+      <a class="primary" href="https://github.com/arunks2804/agenthill">View the repository</a>
+      <a href="https://github.com/arunks2804/agenthill/blob/main/PRODUCT_BRIEF.md">Read the Product Brief</a>
+      <a href="demo/agenthill-demo.mp4" download>Download the MP4</a>
+    </div>
+    <p class="note">The voiceover is AI-generated (Piper, en-GB). All application footage is a live recording, and every number shown is computed by the running system.</p>
+  </main>
+</body>
+</html>

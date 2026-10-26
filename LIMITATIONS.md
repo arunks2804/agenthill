@@ -46,4 +46,4 @@ The failures these produce are genuine executions of those configurations. Befor
 12. **"Teams able to self-serve"** is not measurable without multi-team usage. The UI reports it as not measured.
 13. **Accepting an experiment does not deploy anything.** It records the approved configuration. Integrating with a real deployment pipeline is out of scope.
 14. **Demo voiceover** is AI-generated (Piper `en_GB-cori-high`, run locally), and the video discloses this. The narration is synchronized scene by scene but not lip-synced to the pointer frame by frame.
-15. **Demo video on GitHub.** The README links a GIF preview to the MP4 in the repository. Inline playback on GitHub requires uploading the MP4 as a GitHub user-attachment; this has not been verified on GitHub yet.
+15. **Demo video hosting.** GitHub's file view does not play MP4s, so the demo is served from GitHub Pages (https://arunks2804.github.io/agenthill/). The MP4 is also in the repository for download.
