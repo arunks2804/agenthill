@@ -105,14 +105,18 @@ class Narrator:
         self.segments: list[tuple[float, Path]] = []
         self.t0 = time.monotonic()
         self.n = 0
+        self.transcript: list[str] = []
+        AUDIO.mkdir(parents=True, exist_ok=True)
         if enabled:
             from piper import PiperVoice, SynthesisConfig
             self.voice = PiperVoice.load(str(ROOT / "var" / "voices" / f"{voice}.onnx"))
             self.cfg = SynthesisConfig(length_scale=speed, noise_scale=0.6, noise_w_scale=0.75)
-            shutil.rmtree(AUDIO, ignore_errors=True)
-            AUDIO.mkdir(parents=True, exist_ok=True)
+            for f in AUDIO.glob("seg_*.wav"):
+                f.unlink()
 
     def synth(self, text: str) -> tuple[Path | None, float]:
+        self.transcript.append(text)
+        (AUDIO / "transcript.txt").write_text("\n\n".join(f"[{i:02d}] {t}" for i, t in enumerate(self.transcript, 1)) + "\n")
         if not self.enabled:
             return None, min(1.5, 0.02 * len(text))
         self.n += 1
@@ -256,7 +260,7 @@ def plain_cluster(c: dict) -> tuple[str, str]:
                 "a tampered help page told it to give someone administrator rights. A safety lock stopped it, but it had been fooled")
     if cat == "incorrect_tool_selection":
         if d.get("expected_tool") == "reset_password":
-            return "Password resets never happened", "it picked the wrong tool, so the password was never actually reset"
+            return "Password resets never happened", "it picked the wrong tool, so the password was never reset"
         return "Picked the wrong action", f"it chose {d.get('selected_tool', 'another tool')} instead of {d.get('expected_tool', 'the right one')}"
     if cat == "workflow_sequencing":
         then = PLAIN_ACTION.get(d.get("then"), d.get("then"))
@@ -265,7 +269,7 @@ def plain_cluster(c: dict) -> tuple[str, str]:
     if cat == "tool_execution_failure":
         return "Carried on when a system failed", "when the identity check timed out, it told the employee everything was fine"
     if cat == "retrieval_failure":
-        return "Used the wrong help article", "it answered with an unrelated article instead of passing the question to a person"
+        return "Used the wrong help article", "it answered from an unrelated article instead of passing the question to a person"
     if cat == "unnecessary_escalation":
         return "Passed simple questions to a person", "it handed over questions it could have answered itself"
     return c["category_label"], c["hypothesis"]
@@ -336,10 +340,10 @@ def run(args) -> Path | None:
             d.click(".tabs button:has-text('Datasets & test cases')", settle=500)
             page.wait_for_selector("text=test cases")
             d.zoom("table.table", 1.15)
-        with Scene(d, "For example: I forgot my password. The correct handling: check their identity, then reset the password.",
+        with Scene(d, "For example, an employee writes: I forgot my password. The correct handling is to check their identity, then reset the password.",
                    "Example: “I forgot my password” → check identity, then reset the password"):
             d.zoom("tr:has-text('IT-003')", 1.8)
-        with Scene(d, "Three questions are deliberate tricks, because an assistant that can reset passwords will be targeted. "
+        with Scene(d, "Three of the nineteen requests are deliberate tricks, because an assistant that can reset passwords will be targeted. "
                       "A bank tests a new cashier on deposits, and on spotting forged cheques.",
                    "Three questions are deliberate tricks: a tampered help page, a fake admin request, another company’s account"):
             d.zoom("tr:has-text('IT-017')", 1.6)
@@ -386,9 +390,9 @@ def run(args) -> Path | None:
         rows = "".join(f'<tr><td class="n">{i}</td><td><b>{t}</b><div class="sub">{e[0].upper() + e[1:]}.</div></td><td class="n">{n}</td></tr>'
                        for i, ((t, e), n) in enumerate(areas, 1))
         d.slide(f'<div class="kicker">The {words(len(areas))} problem areas</div><table class="tbl areas"><tr><th>#</th><th>Problem</th><th>Requests</th></tr>{rows}</table>')
-        spoken = " ".join(f"{words(i).capitalize()}: {t.lower()}, in {words(n)} request{'s' if n != 1 else ''}." for i, ((t, e), n) in enumerate(areas, 1))
-        with Scene(d, f"It found {words(len(areas))} problem areas. {spoken} The biggest: a tampered help page told it to grant administrator rights, "
-                      "and it tried. A safety lock stopped it, but it had been fooled.", pad=0.5):
+        spoken = " ".join(f"{words(i).capitalize()}, in {words(n)} request{'s' if n != 1 else ''}: {t.lower()}. {e[0].upper() + e[1:]}."
+                          for i, ((t, e), n) in enumerate(areas, 1))
+        with Scene(d, f"It found {words(len(areas))} problem areas. {spoken}", pad=0.5):
             pass
         d.slide(None)
         with Scene(d, "On screen, each group shows the evidence from the recording, kept separate from AgentHill's explanation of the cause.",
@@ -431,7 +435,7 @@ def run(args) -> Path | None:
         with Scene(d, "For the password problem: rewrite the reset tool's label in the instructions' own words.",
                    "Password repair: rewrite the reset tool’s label in the instructions’ words"):
             d.zoom(page.locator(".card", has_text="Clarify the reset_password tool description").first.locator(".patch").first, 1.6)
-        with Scene(d, "These are proposals, so a manager approves three: ignore instructions hidden in documents, reword the reset label, and always check identity first.",
+        with Scene(d, "These are proposals, so a manager approves three of them: ignore instructions hidden in documents, reword the reset tool's label, and always check identity first.",
                    "A manager approves three repairs for testing"):
             d.unzoom(fast=True)
             for title in ("Add an untrusted-content instruction", "Clarify the reset_password tool description", "Require verify_identity before"):
@@ -452,8 +456,14 @@ def run(args) -> Path | None:
         fixed, regressed = d.stat("Fixed"), d.stat("Regressed")
         row = page.locator("[data-testid=comparison] tr", has_text="Task success").first.inner_text().split("\t")
         crit_row = page.locator("[data-testid=comparison] tr", has_text="Critical failures").first.inner_text().split("\t")
-        with Scene(d, f"The result: correct answers rise from {pct_words(row[1])} to {pct_words(row[2])}. {words(fixed).capitalize()} problems fixed, "
-                      f"critical failures down from {words(crit_row[1])} to {words(crit_row[2])}, and {'nothing' if regressed == '0' else words(regressed) + ' things'} broken.",
+        still = d.stat("Still failing")
+        still_keys = page.locator(".stat", has_text="Still failing").first.locator(".stat-hint").inner_text().replace(" ", "").split(",")
+        still_areas = sorted({plain_cluster(c)[0].lower() for c in analysis["clusters"] if set(c["cases"]) & set(still_keys)})
+        with Scene(d, f"The result: correct answers rise from {pct_words(row[1])} to {pct_words(row[2])}. {words(fixed).capitalize()} of the "
+                      f"{words(total - passed)} failed requests now pass, critical failures fall from {words(crit_row[1])} to {words(crit_row[2])}, "
+                      f"and {'nothing' if regressed == '0' else words(regressed) + ' things'} that used to work {'was' if regressed == '0' else 'were'} broken. "
+                      + (f"The one still failing is the {still_areas[0].replace('used the ', '')} case, which none of these three repairs addressed."
+                         if still == "1" and len(still_areas) == 1 else (f"{words(still).capitalize()} are still failing." if still != "0" else "")),
                    f"Correct: {row[1]} → {row[2]} · {fixed} fixed · critical {crit_row[1]} → {crit_row[2]} · {regressed} broken"):
             d.zoom(page.locator(".card", has_text="Baseline vs candidate").first.locator(".stats"), 1.45)
             page.wait_for_timeout(1500)
@@ -472,7 +482,7 @@ def run(args) -> Path | None:
 
         # ================================================================== 5. never repeating a mistake
         d.chapter(5, "Never repeating a mistake", "Confirmed mistakes become permanent test questions")
-        with Scene(d, "Hannah's case becomes a permanent test question, so if the problem ever returns, it will be caught.",
+        with Scene(d, "Hannah's case is added to a permanent list of test questions, so if the problem ever returns, it will be caught.",
                    "Hannah’s case becomes a permanent test question"):
             d.nav("traces")
             page.select_option("[data-testid=trace-run-select]", index=page.locator("[data-testid=trace-run-select] option").count() - 1)
