@@ -6,7 +6,7 @@
 
 [![AgentHill demo — click to play](docs/demo/agenthill-demo-preview.gif)](https://arunks2804.github.io/agenthill/)
 
-**▶ [Watch the narrated product demo (6 min, 1080p, with sound)](https://arunks2804.github.io/agenthill/)** · [download the MP4](docs/demo/agenthill-demo.mp4). It is written for a non-technical audience. Plain-English slides explain the problem, how AgentHill works (exam, marking, black-box recording, repair, retest, pass marks, learning), the pass marks, the five problem areas it found and one worked example. It then shows each step live in the app, with a visible pointer and zoom-ins. Every number spoken is read from the page while it records. The British voiceover is AI-generated (Piper, run locally).
+**▶ [Watch the narrated product demo (6½ min, 1080p, with sound)](https://arunks2804.github.io/agenthill/)** · [download the MP4](docs/demo/agenthill-demo.mp4). It is written for a non-technical audience. Plain-English slides explain the problem, how AgentHill works (exam, marking, black-box recording, repair, retest, pass marks, learning), the pass marks, the five problem areas it found and one worked example. It then shows each step live in the app, with a visible pointer and zoom-ins. Every number spoken is read from the page while it records. The British voiceover is AI-generated (Piper, run locally).
 
 📄 **Start here: [PRODUCT_BRIEF.md](PRODUCT_BRIEF.md)** covers the problem, the users, the product, the decisions and the scope.
 Also: [ARCHITECTURE.md](ARCHITECTURE.md) · [EVALUATION_DESIGN.md](EVALUATION_DESIGN.md) · [PRODUCT_DECISIONS.md](PRODUCT_DECISIONS.md) · [LIMITATIONS.md](LIMITATIONS.md)

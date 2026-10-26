@@ -39,7 +39,7 @@ Every metric shown in the UI comes from persisted results of runs that actually 
 
 [![AgentHill product demo — click to play the narrated walkthrough](docs/demo/agenthill-demo-preview.gif)](https://arunks2804.github.io/agenthill/)
 
-**▶ [Watch the narrated demo (6 min, 1920×1080, with sound)](https://arunks2804.github.io/agenthill/)** · [download the MP4](docs/demo/agenthill-demo.mp4)
+**▶ [Watch the narrated demo (6½ min, 1920×1080, with sound)](https://arunks2804.github.io/agenthill/)** · [download the MP4](docs/demo/agenthill-demo.mp4)
 
 The demo is written so that someone outside the field, a senior executive for example, can follow it without prior knowledge. Plain-English explainer slides come first. Each chapter then shows the real application, with a visible pointer and zoom-ins on the evidence. All app footage is a live Playwright recording, and every number spoken or captioned is read from the page while it records. The British voiceover is AI-generated with Piper, which runs locally.
 
