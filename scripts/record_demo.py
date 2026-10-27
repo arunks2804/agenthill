@@ -143,6 +143,7 @@ class Scene:
         path, self.dur = self.demo.narrator.synth(self.text)
         if self.caption is not None:
             self.demo.caption(self.caption)
+            self.demo.narrator.transcript[-1] += f"\n      caption: {self.caption}"
         self.started = self.demo.narrator.start(path)
         return self
 
@@ -209,6 +210,10 @@ class Demo:
         box = loc.bounding_box()
         if not box:
             return
+        self.page.evaluate("([x, y]) => { const c = document.getElementById('demo-cursor'); c.style.left = x + 'px'; c.style.top = y + 'px'; }",
+                           [box["x"] + min(box["width"] * 0.5, 80), box["y"] + min(box["height"] * 0.5, 40)])
+        self.page.wait_for_timeout(600)
+        box = loc.bounding_box()
         self.page.evaluate("""([x, y, s]) => { const r = document.getElementById('root'); const rb = r.getBoundingClientRect();
             r.style.transformOrigin = (x - rb.left) + 'px ' + (y - rb.top) + 'px'; r.style.transform = 'scale(' + s + ')'; }""",
                            [box["x"] + box["width"] / 2, box["y"] + box["height"] / 2, scale])
@@ -298,13 +303,13 @@ def run(args) -> Path | None:
         # ================================================================== opening
         d.slide('<div class="kicker">Product demo</div><h1>AgentHill</h1>'
                 '<p class="lead">A driving test, a mechanic and an annual inspection, for AI assistants.</p>')
-        with Scene(d, "This is AgentHill. Think of it as a driving test, a mechanic, and an annual inspection, for A.I. assistants.", pad=0.6):
+        with Scene(d, "This is AgentHill. Think of it as a driving test, a mechanic, and an annual inspection, for AI assistants.", pad=0.6):
             pass
         d.slide('<div class="kicker">Why it matters</div><h2>AI assistants now do real work</h2>'
                 '<p class="lead">For example, an IT helpdesk assistant that resets passwords, fixes VPN problems and installs software.</p>'
                 '<div class="qs"><div><b>1</b>Is it doing the job correctly?</div><div><b>2</b>When it gets something wrong, why?</div>'
                 '<div><b>3</b>If we fix it, is it really better, and did we break anything else?</div></div>')
-        with Scene(d, "Companies now use A.I. assistants for real work, like an I.T. helpdesk that resets passwords and fixes V.P.N. problems. "
+        with Scene(d, "Companies now use AI assistants for real work, like an IT helpdesk that resets passwords and fixes VPN problems. "
                       "Before you trust one, you need three answers. Is it doing the job correctly? When it fails, why? "
                       "And if we fix it, is it really better, without breaking anything else?", pad=0.4):
             pass
@@ -324,7 +329,7 @@ def run(args) -> Path | None:
                 '<div class="agenda"><div><b>1</b>The exam</div><div><b>2</b>Finding out why</div><div><b>3</b>The repair</div>'
                 '<div><b>4</b>The retest</div><div><b>5</b>Never repeating a mistake</div><div><b>6</b>One platform, every department</div></div>'
                 '<div class="note">To make the demo meaningful, the assistant’s first version was set up with deliberate mistakes. Everything you see is the real system, running live.</div>')
-        with Scene(d, "We'll follow one I.T. helpdesk assistant through six parts. Its first version has deliberate mistakes, and everything you see runs live.", pad=0.4):
+        with Scene(d, "We'll follow one IT helpdesk assistant through six parts. Its first version has deliberate mistakes, and everything you see runs live.", pad=0.4):
             pass
         d.slide(None)
 
@@ -345,8 +350,11 @@ def run(args) -> Path | None:
             d.zoom("tr:has-text('IT-003')", 1.8)
         with Scene(d, "Three of the nineteen requests are deliberate tricks, because an assistant that can reset passwords will be targeted. "
                       "A bank tests a new cashier on deposits, and on spotting forged cheques.",
-                   "Three questions are deliberate tricks: a tampered help page, a fake admin request, another company’s account"):
-            d.zoom("tr:has-text('IT-017')", 1.6)
+                   "Three of the 19 requests are deliberate tricks: a tampered help page, a fake admin request, another company’s account"):
+            d.unzoom(fast=True)
+            d.click("button.chip:has-text('Adversarial')", settle=500)
+            page.wait_for_timeout(500)
+            d.zoom("table.table", 1.45)
         gates = api("/agents")[0]["quality_gates"]
         d.unzoom(fast=True)
         d.caption(None)
@@ -408,7 +416,7 @@ def run(args) -> Path | None:
                 '<li>The identity tool’s label mentioned a <i>“one-time passcode sent to a registered device”</i>: <b>it looked like the best match</b>.</li>'
                 '<li>So it checked Hannah’s identity, told her a link was on its way, and <b>never reset her password</b>.</li></ol>')
         with Scene(d, "Let me take one example in detail: the password reset. Hannah says she's forgotten her password. "
-                      "The instructions say, in I.T. jargon: issue a temporary credential by sending a one-time sign-in link. That means, reset the password. "
+                      "The instructions say, in IT jargon: issue a temporary credential by sending a one-time sign-in link. That means, reset the password. "
                       "The assistant picks a tool by matching those words to each tool's label. The reset tool's label shared no words, so it scored zero. "
                       "The identity tool's label looked closer. So it checked her identity, said a link was coming, and never reset her password.", pad=0.5):
             pass
@@ -464,7 +472,7 @@ def run(args) -> Path | None:
                       f"and {'nothing' if regressed == '0' else words(regressed) + ' things'} that used to work {'was' if regressed == '0' else 'were'} broken. "
                       + (f"The one still failing is the {still_areas[0].replace('used the ', '')} case, which none of these three repairs addressed."
                          if still == "1" and len(still_areas) == 1 else (f"{words(still).capitalize()} are still failing." if still != "0" else "")),
-                   f"Correct: {row[1]} → {row[2]} · {fixed} fixed · critical {crit_row[1]} → {crit_row[2]} · {regressed} broken"):
+                   f"Correct: {row[1]} → {row[2]} · {fixed} of {total - passed} failures fixed · critical failures {crit_row[1]} → {crit_row[2]} · {regressed} broken"):
             d.zoom(page.locator(".card", has_text="Baseline vs candidate").first.locator(".stats"), 1.45)
             page.wait_for_timeout(1500)
             d.zoom("[data-testid=comparison]", 1.3)
@@ -504,7 +512,7 @@ def run(args) -> Path | None:
 
         # ================================================================== 6. every department
         d.chapter(6, "One platform, every department", "The same platform tests assistants for any team")
-        with Scene(d, "The same platform works for any department. Here, an H.R. assistant is added and tested.",
+        with Scene(d, "The same platform works for any department. Here, an HR assistant is added and tested.",
                    "An HR assistant: added and tested on the same platform", pad=0.2):
             d.nav("agents")
             d.click("text=+ Register agent", settle=450)
@@ -521,7 +529,7 @@ def run(args) -> Path | None:
         with Scene(d, f"It handles {words(hp)} of {words(ht)} correctly on the first try, ready for the same find and fix process.",
                    f"HR assistant: {hp} of {ht} correct on the first try"):
             d.zoom("[data-testid=kpis]", 1.4)
-        with Scene(d, "Teams can also choose the A.I. model for each job: local models, Claude, OpenAI, or Gemini.", "Choose the AI model for each job: local, Claude, OpenAI or Gemini"):
+        with Scene(d, "Teams can also choose the AI model for each job: local models, Claude, OpenAI, or Gemini.", "Choose the AI model for each job: local, Claude, OpenAI or Gemini"):
             d.nav("settings")
             d.zoom(".grid-2", 1.2)
         d.unzoom()
@@ -537,7 +545,7 @@ def run(args) -> Path | None:
                 f'<tr><td>Pass marks</td><td>Failed</td><td><b>{"Passed" if ok else verdict}</b></td></tr></table>'
                 '<div class="note">Voiceover is AI-generated (Piper, en-GB). All app footage is a live recording.</div>')
         with Scene(d, f"In summary: from {pct_words(row[1])} to {pct_words(row[2])} correct, with no critical failures and nothing broken. "
-                      "AgentHill: know whether your A.I. assistant works, why it fails, and whether the fix is really better.", pad=1.2):
+                      "AgentHill: know whether your AI assistant works, why it fails, and whether the fix is really better.", pad=1.2):
             pass
         raw = page.video.path() if not args.no_video else None
         ctx.close()
