@@ -185,7 +185,7 @@ function Datasets({ agentId }) {
 
 const EMPTY = { name: '', domain: '', description: '', environment: 'it_service_desk', intended_tasks: '', expected_outcomes: '', system_prompt: '', tools: [], settings: '{}', quality_gates: {}, evaluation_criteria: {}, template_id: null }
 
-function Register({ refreshAgents, setAgentId, onDone }) {
+function Register({ agents, refreshAgents, setAgentId, onDone }) {
   const { data: templates } = useApi('/templates')
   const { data: envs } = useApi('/environments')
   const [f, setF] = useState(EMPTY)
@@ -197,6 +197,7 @@ function Register({ refreshAgents, setAgentId, onDone }) {
       settings: JSON.stringify(t.baseline_config.settings, null, 2), quality_gates: t.quality_gates, evaluation_criteria: t.evaluation_criteria, template_id: t.template_id })
   }
   const env = envs?.find((e) => e.name === f.environment)
+  const existing = agents.find((a) => a.name.trim().toLowerCase() === f.name.trim().toLowerCase())
   useEffect(() => {
     if (env && !f.template_id && f.tools.length === 0) setF((x) => ({ ...x, tools: env.tools.filter((t) => t.name !== 'grant_admin_access').map((t) => ({ name: t.name, enabled: true, description: t.default_description })) }))
   }, [env])
@@ -212,7 +213,7 @@ function Register({ refreshAgents, setAgentId, onDone }) {
   return (
     <Card title="Register an AI agent" subtitle="Templates pre-fill a demonstration agent and load its curated golden dataset; every field can be edited."
       actions={<select onChange={(e) => e.target.value && loadTemplate(e.target.value)} defaultValue="" data-testid="template-select">
-        <option value="">Load template…</option>{(templates || []).map((t) => <option key={t.template_id} value={t.template_id}>{t.name}</option>)}</select>}>
+        <option value="">Load template…</option>{(templates || []).map((t) => <option key={t.template_id} value={t.template_id}>{t.name}{agents.some((a) => a.template_id === t.template_id) ? ' (already registered)' : ''}</option>)}</select>}>
       <div className="grid-2">
         <div>
           <label className="field">Agent name<input value={f.name} onChange={(e) => setF({ ...f, name: e.target.value })} data-testid="agent-name" /></label>
@@ -236,8 +237,10 @@ function Register({ refreshAgents, setAgentId, onDone }) {
           <tr key={t.name}><td><input type="checkbox" checked={t.enabled} onChange={(e) => setTool(i, { enabled: e.target.checked })} /></td><td><code>{t.name}</code></td>
             <td><input className="wide" value={t.description} onChange={(e) => setTool(i, { description: e.target.value })} /></td></tr>))}</tbody>
       </table>
+      {existing && <div className="warn-box" data-testid="duplicate-agent">“{existing.name}” is already registered (current version v{existing.current_config_version}). Each agent is registered once; improvements are added to it as new versions.{' '}
+        <Button kind="ghost" onClick={() => { setAgentId(existing.id); onDone() }}>Open it →</Button></div>}
       <ErrorBox error={err} />
-      <Button onClick={submit} disabled={!f.name || !f.system_prompt} data-testid="register-agent">Register agent{f.template_id ? ' and load golden dataset' : ''}</Button>
+      <Button onClick={submit} disabled={!f.name || !f.system_prompt || !!existing} data-testid="register-agent">Register agent{f.template_id ? ' and load golden dataset' : ''}</Button>
     </Card>
   )
 }

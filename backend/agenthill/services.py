@@ -152,6 +152,11 @@ def validate_agent_payload(p: dict) -> None:
 
 def register_agent(db, tenant: str, actor: str, p: dict) -> Agent:
     validate_agent_payload(p)
+    name = p["name"].strip()
+    if any(x.name.strip().casefold() == name.casefold() for x in db.query(Agent).filter_by(tenant_id=tenant)):
+        raise ServiceError(f"An agent named “{name}” is already registered for this customer. "
+                           "Select it in the Agent menu; improvements are added to it as new versions.", 409)
+    p = {**p, "name": name}
     a = Agent(tenant_id=tenant, name=p["name"], domain=p["domain"], description=p.get("description", ""), environment=p["environment"],
               template_id=p.get("template_id"), intended_tasks=p.get("intended_tasks", []), expected_outcomes=p.get("expected_outcomes", []),
               evaluation_criteria=p.get("evaluation_criteria") or {"judge_pass_threshold": 0.6, "weights": {"deterministic": 0.6, "judge": 0.4}},

@@ -68,3 +68,15 @@ def test_missing_cloud_key_is_reported_not_substituted(client):
 def test_unavailable_ollama_is_reported(client):
     r = client.post("/api/settings/llm/providers/ollama/test", headers=hdr(), json={"base_url": "http://127.0.0.1:9", "model": "m"}).json()
     assert r["ok"] is False and r["error"]["code"] == "unavailable" and "ollama serve" in r["error"]["hint"]
+
+
+def test_same_agent_cannot_be_registered_twice_per_customer(client, db, it_agent):
+    t = S.load_template("it_incident_agent")
+    bc = t["baseline_config"]
+    body = {**t, "name": "  it incident resolution agent ", "template_id": "it_incident_agent", "system_prompt": bc["system_prompt"],
+            "tools": bc["tools"], "settings": bc["settings"], "load_template_dataset": True}
+    r = client.post("/api/agents", headers=hdr("leo"), json=body)
+    assert r.status_code == 409 and "already registered" in r.json()["detail"]
+    assert len(client.get("/api/agents", headers=hdr()).json()) == 1
+    assert db.query(D.Dataset).count() == 1
+    assert client.post("/api/agents", headers=hdr("leo", tenant="globex"), json=body).status_code == 200

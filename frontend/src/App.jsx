@@ -73,7 +73,7 @@ export default function App() {
             <label>Agent</label>
             <select value={agentId ?? ''} onChange={(e) => setAgentId(Number(e.target.value))} data-testid="agent-select">
               {agents.length === 0 && <option value="">No agents registered</option>}
-              {agents.map((a) => <option key={a.id} value={a.id}>{a.name} · v{a.current_config_version}</option>)}
+              {agents.map((a) => <option key={a.id} value={a.id}>{a.name} — current version v{a.current_config_version}{a.configs.length > 1 ? ` (${a.configs.length} versions)` : ''}</option>)}
             </select>
           </div>
           <div className="identity">
