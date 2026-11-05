@@ -11,3 +11,7 @@ secret.key
 .DS_Store
 .claude/
 frontend/dist/
+
+# Personal reference documents (kept local only)
+docs/AgentHill_Feature_List.docx
+docs/AgentHill_Demo_Guide.docx
